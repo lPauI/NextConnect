@@ -12,11 +12,11 @@ const Nav = () => {
 			<Link href='/'>
 				<h1 className='text-xl font-bold text-black'>
 					<Image
-						src='/images/logo.png' // Replace with your image path
+						src='/images/logo.png'
 						alt='Logo'
-						width={80} // Set the width according to your needs
-						height={80} // Set the height according to your needs
-						className='mr-2 ml-2' // Add margin or any other class for styling
+						width={80}
+						height={80}
+						className='mr-2 ml-2'
         			  />
 				</h1>
 			</Link>
