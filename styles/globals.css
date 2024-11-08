@@ -1,0 +1,108 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	font-family: "Space Grotesk", sans-serif;
+}
+
+/* Hide the Google Translate toolbar and iframe */
+.goog-te-banner-frame.skiptranslate, 
+.goog-te-gadget-icon, 
+.goog-te-menu-value, 
+.goog-te-menu-frame.skiptranslate, 
+.goog-te-combo, 
+.goog-te-button, 
+.skiptranslate,
+.google-translate-element,
+body > iframe,
+body > .goog-te-spinner-pos {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    width: 0 !important;
+    overflow: hidden !important;
+    position: absolute !important;
+    top: -9999px !important;
+    left: -9999px !important;
+}
+
+/* Hide the Google Translate logo and any loading spinner */
+.VIpgJd-ZVi9od-aZ2wEe-wOHMyf,
+.VIpgJd-ZVi9od-aZ2wEe-OiiCO {
+    display: none !important;
+}
+
+/* Ensure there are no empty gaps left by the hidden elements */
+body {
+    top: 0px !important;
+}
+
+
+.poppins {
+	font-family: "Poppins", sans-serif;
+}
+.link {
+	word-break: break-all;
+}
+.register {
+	background-image: url("../images/regimage.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+	background-blend-mode: multiply;
+}
+.registergray {
+	background-image: url("../images/regimage.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+	background-blend-mode: multiply;
+	filter: grayscale(100%);
+}
+.login {
+	background-image: url("../images/heroimage.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+	background-blend-mode: multiply;
+}
+tr:nth-child(even) {
+	background-color: #f0eeed;
+}
+table {
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+	max-height: 200px;
+	overflow-y: hidden;
+	width: 100%;
+}
+th,
+td {
+	border: 1px solid #ddd;
+	border-collapse: collapse;
+	padding: 10px;
+}
+.dim {
+	background-color: rgba(0, 0, 0, 0.8);
+}
+
+@keyframes gradient-animation {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+.animated-gradient {
+	background: linear-gradient(270deg, #1e3a8a, #9333ea, #6366f1, #10b981);
+	background-size: 800% 800%;
+	animation: gradient-animation 20s ease infinite;
+}
