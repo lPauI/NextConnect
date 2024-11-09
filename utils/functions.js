@@ -184,6 +184,20 @@ export const signUp = async (name, email, password, router) => {
 //👇🏻 Appwrite login function
 export const logIn = async (email, setEmail, password, setPassword, router) => {
     try {
+        // Check if there is already an active session
+        const currentSession = await account.getSession("current");
+
+        if (currentSession) {
+            successMessage(`Welcome back 🎉`);
+            router.push("/dashboard");
+            return;
+        }
+    } catch (error) {
+        //do nothing lol
+    }
+
+    // No active session, proceed with login
+    try {
         await account.createEmailSession(email, password);
         successMessage(`Welcome back 🎉`);
         setEmail("");
