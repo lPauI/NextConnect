@@ -1,28 +1,28 @@
-import React, { useEffect, useState } from 'react';
-import { getEventTags } from '../utils/functions';
+import React, { useState, useEffect } from "react";
+import { getEventTags } from "../utils/functions";
 
 const EventTags = ({ eventId }) => {
     const [tags, setTags] = useState([]);
 
     useEffect(() => {
         const fetchTags = async () => {
-            const tagsData = await getEventTags(eventId);
-            setTags(tagsData);
+            const fetchedTags = await getEventTags(eventId);
+            setTags(fetchedTags);
         };
+        
         fetchTags();
     }, [eventId]);
 
     return (
-        <div>
-            {tags.length > 0 ? (
-                tags.map((tag, index) => (
-                    <span key={index} className="tag-class">
-                        {tag}
-                    </span>
-                ))
-            ) : (
-                <span>No tags available</span>
-            )}
+        <div className="flex flex-wrap gap-2 mt-4">
+            {tags.map((tag, index) => (
+                <span 
+                key={index} 
+                className="px-4 py-2 bg-blue-500 text-white rounded-full text-sm shadow-lg transform transition duration-300 ease-in-out hover:scale-105 hover:bg-blue-400"
+                >
+                    {tag}
+                </span>
+            ))}
         </div>
     );
 };
