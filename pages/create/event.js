@@ -34,7 +34,7 @@ const CreateEventPage = () => {
         "Diversity & Inclusion", "Women's Rights", "Human Rights", 
         "Sustainability", "Youth Empowerment", "Equal Opportunity", 
         "Gender Equality", "BLM", "Anti-Racism", "Religion", "Gender & Gender Identity", "Economic Diversity",
-        "Body Positivity", "Culture", "History"
+        "Body Positivity", "Culture", "History", "Dissability"
     ]
 
     useEffect(() => {
