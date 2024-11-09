@@ -8,15 +8,16 @@ import logging
 from appwrite.client import Client
 from appwrite.services.databases import Databases
 
-from dotenv import load_dotenv
+import toml
 
-load_dotenv()
+with open('secrets.toml', 'r') as f:
+    secrets = toml.load(f)
 
-os.environ['NEXT_PUBLIC_APPWRITE_ENDPOINT'] = os.environ['NEXT_PUBLIC_APPWRITE_ENDPOINT']
-os.environ['NEXT_PUBLIC_PROJECT_ID'] = os.environ['NEXT_PUBLIC_PROJECT_ID']
-os.environ['NEXT_PUBLIC_DB_ID'] = os.environ['NEXT_PUBLIC_DB_ID']
-os.environ['NEXT_PUBLIC_EVENTS_COLLECTION_ID'] = os.environ['NEXT_PUBLIC_EVENTS_COLLECTION_ID']
-os.environ['NEXT_PUBLIC_EMAIL_API_KEY'] = os.environ['NEXT_PUBLIC_EMAIL_API_KEY']
+os.environ['NEXT_PUBLIC_APPWRITE_ENDPOINT'] = secrets['NEXT_PUBLIC_APPWRITE_ENDPOINT']
+os.environ['NEXT_PUBLIC_PROJECT_ID'] = secrets['NEXT_PUBLIC_PROJECT_ID']
+os.environ['NEXT_PUBLIC_DB_ID'] = secrets['NEXT_PUBLIC_DB_ID']
+os.environ['NEXT_PUBLIC_EVENTS_COLLECTION_ID'] = secrets['NEXT_PUBLIC_EVENTS_COLLECTION_ID']
+os.environ['NEXT_PUBLIC_EMAIL_API_KEY'] = secrets['NEXT_PUBLIC_EMAIL_API_KEY']
 
 client = Client()
 client.set_endpoint(os.getenv('NEXT_PUBLIC_APPWRITE_ENDPOINT'))  # Your Appwrite endpoint
