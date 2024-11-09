@@ -16,13 +16,21 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve"
+    "jsx": "preserve",
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "strictNullChecks": true
   },
   "include": [
-    "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx"
-, "pages/events.js"  ],
+    "**/*.tsx",
+    "next-env.d.ts",
+    "pages/events.js",
+    ".next/types/**/*.ts"
+  ],
   "exclude": [
     "node_modules"
   ]

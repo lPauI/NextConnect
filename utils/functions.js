@@ -3,7 +3,8 @@ import { account, db, storage } from "./appwrite";
 import { toast } from "react-toastify";
 import { ID, Query } from "appwrite";
 import emailjs from "@emailjs/browser";
-import QRCode from "qrcode"; // Ensure QRCode is imported correctly
+import QRCode from "qrcode"; 
+import opencage from 'opencage-api-client';
 
 //👇🏻 generate random strings as ID
 const generateID = () => Math.random().toString(36).substring(2, 24);
@@ -276,6 +277,38 @@ export const checkAuthStatusDashboard = async (setUser, setLoading, setEvents, r
     }
 };
 
+export const setVenueCoordinates = async (eventId, venue) => {
+    const apiKey = process.env.NEXT_PUBLIC_OPENCAGE_KEY; // Ensure your .env file has the correct key without quotes
+
+    try {
+        // Fetch coordinates using opencage-api-client
+        const data = await opencage.geocode({ q: venue, key: apiKey });
+
+        if (data && data.results && data.results.length > 0) {
+            const { lat, lng } = data.results[0].geometry;
+
+            // Update the event document with coordinates in Appwrite, converting lat and lng to strings
+            await db.updateDocument(
+                process.env.NEXT_PUBLIC_DB_ID,
+                process.env.NEXT_PUBLIC_EVENTS_COLLECTION_ID,
+                eventId,
+                {
+                    VENUE_LAT: lat.toString(),
+                    VENUE_LONG: lng.toString(),
+                }
+            );
+            console.log("Coordinates set successfully!");
+        } else {
+            console.error("No coordinates found for the specified venue.", data);
+        }
+    } catch (error) {
+        console.log("OpenCage API Key:", apiKey);
+        console.error("Error fetching or updating coordinates:", error.message);
+        errorMessage("Failed to fetch or set coordinates for venue ❌");
+    }
+};
+
+
 //👇🏻 create a new event
 export const createEvent = async (
     userId,
@@ -287,7 +320,7 @@ export const createEvent = async (
     note,
     flier,
     tags,
-    participants, // New parameter for participants required
+    participants,
     router
 ) => {
     const createDocument = async (flier_url = "https://google.com") => {
@@ -312,6 +345,10 @@ export const createEvent = async (
                     participants: parseInt(participants, 10), // Ensuring the value is an integer
                 }
             );
+
+            // Call the function to set coordinates after creating the event
+            await setVenueCoordinates(response.$id, venue);
+
             successMessage("Event created successfully 🎉");
             return response.$id;
         } catch (error) {
@@ -603,3 +640,4 @@ export const getEventTags = async (id) => {
         return [];
     }
 };
+
