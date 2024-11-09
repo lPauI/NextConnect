@@ -23,16 +23,16 @@ db = Databases(client)
 
 def get_all_event_tags():
     try:
-        # Fetch all documents from the collection
         response = db.list_documents(
             database_id=os.getenv('NEXT_PUBLIC_DB_ID'),
             collection_id=os.getenv('NEXT_PUBLIC_EVENTS_COLLECTION_ID')
         )
 
-        # Extract 'venue' latitude and longitude from each document
-        tags = [(doc.get('VENUE_LAT', None), doc.get('VENUE_LONG', None)) for doc in response['documents']]
-
-        return tags
+        # Include title in the returned data
+        data = [(doc.get('VENUE_LAT', None), 
+                doc.get('VENUE_LONG', None),
+                doc.get('title', '')) for doc in response['documents']]
+        return data
     except Exception as err:
         logging.error("Unable to fetch event tags ❌")
         logging.error(err)
@@ -44,7 +44,7 @@ def get_all_event_tags():
 
 def get_data():
     tags = get_all_event_tags()
-    df = pd.DataFrame(tags, columns=["lat", "lon"])
+    df = pd.DataFrame(tags, columns=["lat", "lon", "title"])
     df['lat'] = pd.to_numeric(df['lat'], errors='coerce')
     df['lon'] = pd.to_numeric(df['lon'], errors='coerce')
     return df
@@ -54,18 +54,31 @@ st.session_state.df = get_data()
 df = st.session_state.df
 
 # Define the layer for the heatmap
-layer = pdk.Layer(
+heatmap_layer = pdk.Layer(
     "HeatmapLayer",
     data=df,
     get_position='[lon, lat]',
     radiusPixels=50,
     colorRange=[
-        [0, 0, 255, 0],  # Blue
-        [0, 255, 255, 128],  # Cyan
-        [0, 255, 0, 255],  # Green
-        [255, 255, 0, 255],  # Yellow
-        [255, 0, 0, 255],  # Red
+        [0, 0, 255, 0],
+        [0, 255, 255, 128],
+        [0, 255, 0, 255],
+        [255, 255, 0, 255],
+        [255, 0, 0, 255],
     ],
+)
+
+text_layer = pdk.Layer(
+    "TextLayer",
+    data=df,
+    get_position='[lon, lat]',
+    get_text='title',
+    get_size=16,
+    get_color=[255, 255, 255],
+    get_angle=0,
+    text_anchor='"middle"',
+    text_baseline='"bottom"',
+    pickable=True,
 )
 
 # Set the viewport location
@@ -77,5 +90,8 @@ view_state = pdk.ViewState(
 )
 
 # Render the deck.gl map
-r = pdk.Deck(layers=[layer], initial_view_state=view_state)
+r = pdk.Deck(
+    layers=[heatmap_layer, text_layer], 
+    initial_view_state=view_state
+)
 st.pydeck_chart(r)
