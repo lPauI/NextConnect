@@ -571,15 +571,21 @@ export const disableRegistration = async (documentId) => {
 };
 
 // utils/functions.js
-export const getEventTags = async (eventId) => {
-    // Simulating fetching tags from a database or API
-    // Replace with your actual data-fetching logic if different
+export const getEventTags = async (id) => {
     try {
-        const response = await fetch(`/api/tags?eventId=${eventId}`);
-        const data = await response.json();
-        return data.tags; // Assume API returns an object with a 'tags' array
-    } catch (error) {
-        console.error("Failed to fetch event tags:", error);
+        const getDoc = await db.getDocument(
+            process.env.NEXT_PUBLIC_DB_ID,
+            process.env.NEXT_PUBLIC_EVENTS_COLLECTION_ID,
+            id
+        );
+
+        // Assuming tags are stored as an array on the document
+        const tags = getDoc.tags || [];
+
+        return tags;
+    } catch (err) {
+        errorMessage("Unable to fetch event tags ❌");
+        console.error(err);
         return [];
     }
 };
