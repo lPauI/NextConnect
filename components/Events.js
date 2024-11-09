@@ -29,56 +29,68 @@ const Events = ({ events }) => {
 	};
 
 	return (
-		<div className="w-full flex flex-wrap items-center justify-center">
-			{events.map((event) => (
-				<div
-					className="relative md:w-[450px] w-full hover:shadow border-[1px] rounded-2xl m-3"
-					key={event.$id}
-				>
+		<div className="w-full flex flex-wrap items-center justify-center p-4">
+			{events.map((event) => {
+				// Calculate the progress percentage for the participants
+				const totalParticipants = event.participants || 0;
+				const currentParticipants = event.attendees?.length || 0;
+				const progressPercentage = totalParticipants > 0 
+					? Math.min((currentParticipants / totalParticipants) * 100, 100) 
+					: 0;
+
+				return (
 					<div
-						className="p-4 w-full cursor-pointer"
-						onClick={() => handleRoute(event.slug, event.$id)}
+						className="relative md:w-[450px] w-full bg-white rounded-xl shadow-lg transition-transform transform hover:scale-105 hover:shadow-xl m-4 border border-gray-200"
+						key={event.$id}
 					>
-						{/* Participant Icon and Count */}
-						<div className="absolute top-4 right-4 flex items-center text-gray-500">
-							<FaUser className="mr-1" />
-							<span className="text-lg font-semibold">
-								{event?.attendees?.length || 0} out of {event.participants || "N/A"}
-							</span>
-						</div>
-
-						<div className="grid grid-cols-2 items-center mb-6">
-							<h2 className="text-xl font-medium">{event.title}</h2>
-							
-						</div>
-						<EventTags eventId={event.$id} />
-						<p className="opacity-50">Date: {formatDate(event.date)}</p>
-						<p className="opacity-50">Venue: {event.venue}</p>
-					
-
-						<p
-							className={`mt-2 font-bold ${
-								getEventStatus(event.date, event.disableRegistration) ===
-								"ONGOING"
-									? "text-green-600"
-									: getEventStatus(event.date, event.disableRegistration) ===
-									  "UPCOMING"
-									? "text-blue-600"
-									: "text-gray-600"
-							}`}
+						<div
+							className="p-6 w-full cursor-pointer rounded-t-xl"
+							onClick={() => handleRoute(event.slug, event.$id)}
 						>
-							{getEventStatus(event.date, event.disableRegistration)}
-						</p>
-					</div>
+							{/* Participant Progress Bar and Count */}
+							<div className="flex items-center justify-center mb-6">
+								<div className="relative w-full h-8 bg-gray-200 rounded-full overflow-hidden shadow-inner">
+									<div 
+										className="absolute top-0 left-0 h-full bg-gradient-to-r from-blue-500 to-indigo-500 transition-all duration-500 ease-out"
+										style={{ width: `${progressPercentage}%` }}
+									></div>
+									<div className="relative flex items-center justify-center h-full text-white font-semibold">
+										<FaUser className="mr-2" />
+										<span className="text-sm">{currentParticipants} / {totalParticipants || "N/A"} Attending</span>
+									</div>
+								</div>
+							</div>
 
-					<div className="w-full py-6 bg-blue-600 rounded-b-2xl flex items-center px-4 justify-between">
-						<MdDelete
-							className="text-gray-200 text-2xl cursor-pointer"
-							onClick={() => deleteTicket(event.$id)}
-						/>
+							<div className="grid grid-cols-2 items-center mb-4">
+								<h2 className="text-2xl font-semibold text-gray-800">{event.title}</h2>
+							</div>
+
+							<EventTags eventId={event.$id} />
+							<p className="text-gray-600 mt-4">📅 <span className="font-medium">{formatDate(event.date)}</span></p>
+							<p className="text-gray-600 mt-2">📍 <span className="font-medium">{event.venue}</span></p>
+
+							<p
+								className={`mt-4 font-bold text-lg ${
+									getEventStatus(event.date, event.disableRegistration) === "ONGOING"
+										? "text-green-500"
+										: getEventStatus(event.date, event.disableRegistration) === "UPCOMING"
+										? "text-blue-500"
+										: "text-gray-500"
+								}`}
+							>
+								{getEventStatus(event.date, event.disableRegistration)}
+							</p>
+						</div>
+
+						<div className="w-full py-4 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-b-xl flex items-center justify-between px-6">
+							<MdDelete
+								className="text-white text-2xl cursor-pointer hover:text-red-400 transition duration-300"
+								onClick={() => deleteTicket(event.$id)}
+							/>
+						</div>
 					</div>
-				</div>
-			))}
+				);
+			})}
 		</div>
 	);
 };
