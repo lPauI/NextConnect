@@ -8,7 +8,7 @@ import Image from "next/image";
 const Nav = () => {
 	const [hamburger, setHamburger] = useState(false);
 	return (
-		<div className='h-[10vh] flex items-center justify-between px-[20px] sticky top-0 bg-white'>
+		<div className='h-[10vh] flex items-center justify-between px-[20px] sticky top-0 bg-white z-100'>
 			<Link href='/'>
 				<h1 className='text-xl font-bold text-black'>
 					<Image
