@@ -67,7 +67,7 @@ const CreateEventPage = () => {
             description,
             note,
             flier,
-            selectedTags, // Use selectedTags here
+            selectedTags,
             numParticipants,
             router
         );
