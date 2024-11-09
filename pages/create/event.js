@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useRef } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import AuthNav from "../../components/AuthNav";
 import SideNav from "../../components/SideNav";
 import Loading from "../../components/Loading";
@@ -17,15 +17,17 @@ const CreateEventPage = () => {
     const [description, setDescription] = useState("");
     const [note, setNote] = useState("");
     const [flier, setFlier] = useState(null);
-    const router = useRouter();
-    const [loading, setLoading] = useState(true);
-
-    // URL-ul pentru iframe Google Maps public
+    const [numParticipants, setNumParticipants] = useState(1); 
+    const [selectedTags, setSelectedTags] = useState([]); // Initialize selectedTags
     const [mapUrl, setMapUrl] = useState("");
+    const [loading, setLoading] = useState(true);
+    const router = useRouter();
 
     const authenticateUser = useCallback(() => {
         checkAuthStatus(setUser, setLoading, router);
     }, [router]);
+
+    const predefinedTags = ["Education", "Health", "Environment", "Community", "Technology"];
 
     useEffect(() => {
         authenticateUser();
@@ -39,10 +41,16 @@ const CreateEventPage = () => {
         }
     }, [venue]);
 
+    const handleTagClick = (tag) => {
+        setSelectedTags((prevTags) =>
+            prevTags.includes(tag) ? prevTags.filter((t) => t !== tag) : [...prevTags, tag]
+        );
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // Crearea evenimentului
+        // Create the event
         const eventId = await createEvent(
             user.$id,
             title,
@@ -52,6 +60,8 @@ const CreateEventPage = () => {
             description,
             note,
             flier,
+            selectedTags, // Use selectedTags here
+            numParticipants,
             router
         );
 
@@ -72,6 +82,7 @@ const CreateEventPage = () => {
                         Create a New Event
                     </h2>
                     <form className="flex flex-col" onSubmit={handleSubmit}>
+                        {/* Title */}
                         <label htmlFor="title" className="font-semibold text-gray-700 mb-2">
                             Title
                         </label>
@@ -84,6 +95,7 @@ const CreateEventPage = () => {
                             required
                         />
 
+                        {/* Venue */}
                         <label htmlFor="venue" className="font-semibold text-gray-700 mb-2">
                             Venue
                         </label>
@@ -97,21 +109,22 @@ const CreateEventPage = () => {
                             required
                         />
 
-                    {mapUrl && (
-                        <div className="mt-6 w-full h-64">
-                            <iframe
-                                title="Google Maps Location"
-                                width="100%"
-                                height="100%"
-                                frameBorder="0"
-                                style={{ border: 0 }}
-                                src={mapUrl}    
-                                allowFullScreen
-                            ></iframe>
-                        </div>
-                    )}
+                        {/* Google Maps iframe */}
+                        {mapUrl && (
+                            <div className="mt-6 w-full h-64">
+                                <iframe
+                                    title="Google Maps Location"
+                                    width="100%"
+                                    height="100%"
+                                    frameBorder="0"
+                                    style={{ border: 0 }}
+                                    src={mapUrl}
+                                    allowFullScreen
+                                ></iframe>
+                            </div>
+                        )}
 
-
+                        {/* Time */}
                         <label htmlFor="time" className="font-semibold text-gray-700 mb-2">
                             Time
                         </label>
@@ -124,6 +137,7 @@ const CreateEventPage = () => {
                             required
                         />
 
+                        {/* Date */}
                         <label htmlFor="date" className="font-semibold text-gray-700 mb-2">
                             Date
                         </label>
@@ -134,6 +148,7 @@ const CreateEventPage = () => {
                             required
                         />
 
+                        {/* Description */}
                         <label htmlFor="description" className="font-semibold text-gray-700 mb-2">
                             Event Description
                         </label>
@@ -146,6 +161,7 @@ const CreateEventPage = () => {
                             required
                         />
 
+                        {/* Note */}
                         <label htmlFor="note" className="font-semibold text-gray-700 mb-2">
                             Note to Attendees
                         </label>
@@ -158,6 +174,38 @@ const CreateEventPage = () => {
                             required
                         />
 
+                        {/* Tags */}
+                        <label className="font-semibold text-gray-700 mb-2">Tags</label>
+                        <div className="flex flex-wrap gap-2 mb-4">
+                            {predefinedTags.map((tag) => (
+                                <button
+                                    type="button"
+                                    key={tag}
+                                    onClick={() => handleTagClick(tag)}
+                                    className={`px-3 py-1 rounded-full border ${
+                                        selectedTags.includes(tag) ? "bg-blue-600 text-white" : "bg-gray-200"
+                                    }`}
+                                >
+                                    {tag}
+                                </button>
+                            ))}
+                        </div>
+
+                        {/* Participants */}
+                        <label htmlFor="numParticipants" className="font-semibold text-gray-700 mb-2">
+                            Number of Participants Required
+                        </label>
+                        <input
+                            name="numParticipants"
+                            type="number"
+                            min="1"
+                            className="border py-2 px-4 rounded mb-4 focus:border-blue-500"
+                            value={numParticipants}
+                            onChange={(e) => setNumParticipants(e.target.value)}
+                            required
+                        />
+
+                        {/* Flier */}
                         <label htmlFor="file" className="font-semibold text-gray-700 mb-2">
                             Event Flier (optional)
                         </label>
@@ -169,6 +217,7 @@ const CreateEventPage = () => {
                             accept="image/png, image/jpeg"
                         />
 
+                        {/* Submit */}
                         <button
                             type="submit"
                             className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition-all duration-200 font-semibold"
@@ -176,8 +225,6 @@ const CreateEventPage = () => {
                             Create Event
                         </button>
                     </form>
-
-                    
                 </main>
             </div>
         </div>

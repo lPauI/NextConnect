@@ -16,7 +16,6 @@ const Events = ({ events }) => {
 		const todayWithoutTime = new Date(today.getFullYear(), today.getMonth(), today.getDate());
 		const eventDateObj = new Date(eventDate);
 
-
 		if(!disableRegistration) {
 			if (eventDateObj <= todayWithoutTime) {
 				return "ONGOING"; 
@@ -24,7 +23,7 @@ const Events = ({ events }) => {
 				return "UPCOMING"; 
 			}
 		} else {
-			return "FINISHED"; // GATA
+			return "FINISHED"; 
 		}
 	};
 
@@ -39,7 +38,6 @@ const Events = ({ events }) => {
 					className='p-4 w-full cursor-pointer'
 					onClick={() => handleRoute(event.slug, event.$id)}
 				>
-					{/* Title and Tags in Parallel */}
 					<div className="grid grid-cols-2 items-center mb-6">
 						<h2 className='text-xl font-medium'>{event.title}</h2>
 						<EventTags eventId={event.$id} />
@@ -53,7 +51,11 @@ const Events = ({ events }) => {
 					<p className='opacity-50'>Date: {formatDate(event.date)}</p>
 					<p className='opacity-50'>Venue: {event.venue}</p>
 
-					{/* Event Status */}
+					{/* Display number of participants required */}
+					<p className='opacity-50'>
+						Participants Needed: {event.participants || "N/A"}
+					</p>
+
 					<p className={`mt-2 font-bold ${
 						getEventStatus(event.date, event.disableRegistration) === "ONGOING" ? "text-green-600" :
 						getEventStatus(event.date, event.disableRegistration) === "UPCOMING" ? "text-blue-600" : "text-gray-600"

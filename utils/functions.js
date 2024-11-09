@@ -273,6 +273,7 @@ export const createEvent = async (
     note,
     flier,
     tags,
+    participants, // New parameter for participants required
     router
 ) => {
     const createDocument = async (flier_url = "https://google.com") => {
@@ -294,6 +295,7 @@ export const createEvent = async (
                     disableRegistration: false,
                     flier_url,
                     tags,
+                    participants: parseInt(participants, 10), // Ensuring the value is an integer
                 }
             );
             successMessage("Event created successfully 🎉");
@@ -566,4 +568,18 @@ export const disableRegistration = async (documentId) => {
 		console.error(err); // Failure
 		errorMessage("Encountered an error 😪");
 	}
+};
+
+// utils/functions.js
+export const getEventTags = async (eventId) => {
+    // Simulating fetching tags from a database or API
+    // Replace with your actual data-fetching logic if different
+    try {
+        const response = await fetch(`/api/tags?eventId=${eventId}`);
+        const data = await response.json();
+        return data.tags; // Assume API returns an object with a 'tags' array
+    } catch (error) {
+        console.error("Failed to fetch event tags:", error);
+        return [];
+    }
 };
