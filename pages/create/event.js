@@ -11,6 +11,9 @@ import { predefinedTags } from "../../utils/tags";
 import { FaArrowLeft } from "react-icons/fa";
 
 const CreateEventPage = () => {
+    const router = useRouter();
+    const { suggestedTitle, suggestedDescription } = router.query;
+    
     const [user, setUser] = useState({});
     const [title, setTitle] = useState("");
     const [date, setDate] = useState(new Date());
@@ -23,11 +26,20 @@ const CreateEventPage = () => {
     const [selectedTags, setSelectedTags] = useState([]);
     const [mapUrl, setMapUrl] = useState("");
     const [loading, setLoading] = useState(true);
-    const router = useRouter();
 
     const authenticateUser = useCallback(() => {
         checkAuthStatus(setUser, setLoading, router);
     }, [router]);
+
+    // Set initial values from router query
+    useEffect(() => {
+        if (suggestedTitle) {
+            setTitle(suggestedTitle);
+        }
+        if (suggestedDescription) {
+            setDescription(suggestedDescription);
+        }
+    }, [suggestedTitle, suggestedDescription]);
 
     useEffect(() => {
         authenticateUser();
@@ -49,189 +61,200 @@ const CreateEventPage = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const eventId = await createEvent(
-            user.$id,
-            title,
-            date,
-            time,
-            venue,
-            description,
-            note,
-            flier,
-            selectedTags,
-            numParticipants,
-            router
-        );
-        router.push(`/dashboard`);
+        
+        try {
+            await createEvent(
+                user.$id,
+                title,
+                date,
+                time,
+                venue,
+                description,
+                note,
+                flier,
+                selectedTags,
+                numParticipants,
+                router
+            );
+        } catch (error) {
+            console.error("Error creating event:", error);
+        }
     };
 
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+
     return (
-        <div className="flex flex-col min-h-screen">
-            <AuthNav user={user} />
-            <div className="min-h-screen bg-gray-100 flex flex-col items-center py-10">
-                <Head>
-                    <title>Create New Event | NextConnect</title>
-                    <meta name="description" content="Create a new event on NextConnect" />
-                    <link rel="icon" href="/images/favicon.ico" />
-                </Head>
-                <main className="bg-white p-8 rounded shadow-md w-full max-w-lg relative">
-                    {/* Back to Dashboard Button */}
+        <div>
+            <Head>
+                <title>Create Event | NextConnect</title>
+                <meta
+                    name="description"
+                    content="Create a new volunteering event with NextConnect"
+                />
+                <meta name="viewport" content="width=device-width, initial-scale=1" />
+                <link rel="icon" href="/favicon.ico" />
+            </Head>
+
+            <main className="min-h-screen bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
+                <div className="max-w-3xl mx-auto">
                     <button
-                        onClick={() => router.push("/dashboard")}
-                        className="flex items-center mb-4 text-purple-500 hover:text-purple-700 font-semibold absolute top-4 left-4"
+                        onClick={() => router.back()}
+                        className="flex items-center text-gray-600 mb-8"
                     >
-                        <FaArrowLeft className="mr-2" /> Back to Dashboard
+                        <FaArrowLeft className="mr-2" />
+                        Back
                     </button>
-                    <h2 className="text-3xl font-bold text-center mb-6 text-purple-600 pt-5">🎉 Create a New Event</h2>
-                    <form className="flex flex-col" onSubmit={handleSubmit}>
-                        {/* Title */}
-                        <label htmlFor="title" className="font-semibold text-gray-700 mb-2">
-                            📝 Event Title
-                        </label>
-                        <input
-                            name="title"
-                            type="text"
-                            className="border py-2 px-4 rounded mb-4 focus:border-purple-500"
-                            value={title}
-                            onChange={(e) => setTitle(e.target.value)}
-                            required
-                        />
 
-                        {/* Venue */}
-                        <label htmlFor="venue" className="font-semibold text-gray-700 mb-2">
-                            📍 Venue
-                        </label>
-                        <input
-                            name="venue"
-                            type="text"
-                            className="border py-2 px-4 rounded mb-4 focus:border-purple-500"
-                            value={venue}
-                            onChange={(e) => setVenue(e.target.value)}
-                            placeholder="Enter location (e.g., Craft Timisoara)"
-                            required
-                        />
-
-                        {/* Google Maps iframe */}
-                        {mapUrl && (
-                            <div className="mt-6 w-full h-64">
-                                <iframe
-                                    title="Google Maps Location"
-                                    width="100%"
-                                    height="100%"
-                                    frameBorder="0"
-                                    style={{ border: 0 }}
-                                    src={mapUrl}
-                                    allowFullScreen
-                                ></iframe>
-                            </div>
-                        )}
-
-                        {/* Time */}
-                        <label htmlFor="time" className="font-semibold text-gray-700 mb-2">
-                            ⏰ Time
-                        </label>
-                        <input
-                            name="time"
-                            type="time"
-                            className="border py-2 px-4 rounded mb-4 focus:border-purple-500"
-                            value={time}
-                            onChange={(e) => setTime(e.target.value)}
-                            required
-                        />
-
-                        {/* Date */}
-                        <label htmlFor="date" className="font-semibold text-gray-700 mb-2">
-                            📅 Date
-                        </label>
-                        <DatePicker
-                            selected={date}
-                            onChange={(date) => setDate(date)}
-                            className="border py-2 px-4 rounded mb-4 focus:border-purple-500 w-full"
-                            minDate={new Date()}
-                            required
-                        />
-
-                        {/* Description */}
-                        <label htmlFor="description" className="font-semibold text-gray-700 mb-2">
-                            🖊️ Event Description
-                        </label>
-                        <textarea
-                            name="description"
-                            rows="4"
-                            className="border py-2 px-4 rounded mb-4 focus:border-purple-500"
-                            value={description}
-                            onChange={(e) => setDescription(e.target.value)}
-                            required
-                        />
-
-                        {/* Note */}
-                        <label htmlFor="note" className="font-semibold text-gray-700 mb-2">
-                            📢 Note to Attendees
-                        </label>
-                        <textarea
-                            name="note"
-                            rows="4"
-                            className="border py-2 px-4 rounded mb-4 focus:border-purple-500"
-                            value={note}
-                            onChange={(e) => setNote(e.target.value)}
-                            required
-                        />
-
-                        {/* Tags */}
-                        <label className="font-semibold text-gray-700 mb-2">🏷️ Tags</label>
-                        <div className="flex flex-wrap gap-2 mb-4">
-                            {predefinedTags.map((tag) => (
-                                <button
-                                    type="button"
-                                    key={tag}
-                                    onClick={() => handleTagClick(tag)}
-                                    className={`px-3 py-1 rounded-full border transition-all duration-300 ${
-                                        selectedTags.includes(tag)
-                                            ? "bg-purple-600 text-white hover:bg-purple-500"
-                                            : "bg-gray-200 hover:bg-gray-300"
-                                    }`}
-                                >
-                                    {tag}
-                                </button>
-                            ))}
+                    <form onSubmit={handleSubmit} className="space-y-6 bg-white p-6 rounded-lg shadow">
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700">
+                                Event Title
+                            </label>
+                            <input
+                                type="text"
+                                value={title}
+                                onChange={(e) => setTitle(e.target.value)}
+                                required
+                                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                            />
                         </div>
 
-                        {/* Participants */}
-                        <label htmlFor="numParticipants" className="font-semibold text-gray-700 mb-2">
-                            👥 Number of Participants Required
-                        </label>
-                        <input
-                            name="numParticipants"
-                            type="number"
-                            min="1"
-                            className="border py-2 px-4 rounded mb-4 focus:border-purple-500"
-                            value={numParticipants}
-                            onChange={(e) => setNumParticipants(e.target.value)}
-                            required
-                        />
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700">
+                                Date
+                            </label>
+                            <input
+                                type="date"
+                                value={date.toISOString().split('T')[0]}
+                                onChange={(e) => setDate(new Date(e.target.value))}
+                                required
+                                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                            />
+                        </div>
 
-                        {/* Flier */}
-                        <label htmlFor="file" className="font-semibold text-gray-700 mb-2">
-                            📄 Event Flier (optional)
-                        </label>
-                        <input
-                            type="file"
-                            name="file"
-                            onChange={(e) => setFlier(e.target.files[0])}
-                            className="border py-2 px-4 rounded mb-4 focus:border-purple-500"
-                            accept="image/png, image/jpeg"
-                        />
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700">
+                                Time
+                            </label>
+                            <input
+                                type="time"
+                                value={time}
+                                onChange={(e) => setTime(e.target.value)}
+                                required
+                                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                            />
+                        </div>
 
-                        {/* Submit */}
-                        <button
-                            type="submit"
-                            className="bg-purple-600 text-white py-2 px-4 rounded hover:bg-purple-700 transition-all duration-200 font-semibold"
-                        >
-                            Create Event 
-                        </button>
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700">
+                                Venue
+                            </label>
+                            <input
+                                type="text"
+                                value={venue}
+                                onChange={(e) => setVenue(e.target.value)}
+                                required
+                                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                            />
+                            {mapUrl && (
+                                <iframe
+                                    src={mapUrl}
+                                    width="100%"
+                                    height="300"
+                                    style={{ border: 0 }}
+                                    allowFullScreen=""
+                                    loading="lazy"
+                                    className="mt-2"
+                                ></iframe>
+                            )}
+                        </div>
+
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700">
+                                Description
+                            </label>
+                            <textarea
+                                value={description}
+                                onChange={(e) => setDescription(e.target.value)}
+                                required
+                                rows={4}
+                                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                            />
+                        </div>
+
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700">
+                                Additional Notes
+                            </label>
+                            <textarea
+                                value={note}
+                                onChange={(e) => setNote(e.target.value)}
+                                rows={3}
+                                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                            />
+                        </div>
+
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700">
+                                Event Flier
+                            </label>
+                            <input
+                                type="file"
+                                onChange={(e) => setFlier(e.target.files[0])}
+                                accept="image/*"
+                                className="mt-1 block w-full"
+                            />
+                        </div>
+
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700">
+                                Number of Participants
+                            </label>
+                            <input
+                                type="number"
+                                min="1"
+                                value={numParticipants}
+                                onChange={(e) => setNumParticipants(parseInt(e.target.value))}
+                                required
+                                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                            />
+                        </div>
+
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-2">
+                                Tags
+                            </label>
+                            <div className="flex flex-wrap gap-2">
+                                {predefinedTags.map((tag) => (
+                                    <button
+                                        key={tag}
+                                        type="button"
+                                        onClick={() => handleTagClick(tag)}
+                                        className={`px-3 py-1 rounded-full text-sm ${
+                                            selectedTags.includes(tag)
+                                                ? "bg-blue-500 text-white"
+                                                : "bg-gray-200 text-gray-700"
+                                        }`}
+                                    >
+                                        {tag}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+
+                        <div>
+                            <button
+                                type="submit"
+                                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                            >
+                                Create Event
+                            </button>
+                        </div>
                     </form>
-                </main>
-            </div>
+                </div>
+            </main>
         </div>
     );
 };

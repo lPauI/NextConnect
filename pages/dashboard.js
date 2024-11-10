@@ -96,12 +96,18 @@ const Dashboard = () => {
                             <h2 className='text-2xl font-bold mb-4'>Suggested Event</h2>
                             <p className='mb-4'>I suggest you create an event in category <strong>{suggestedCategory}</strong>.</p>
                             <p className='mb-8'>Details: {customIdea}</p>
-                            <button
-                                className='bg-blue-500 text-white px-4 py-2 rounded'
-                                onClick={() => router.push('/create/event')}
-                            >
-                                Create New Event
-                            </button>
+							<button
+								className='bg-blue-500 text-white px-4 py-2 rounded'
+								onClick={() => router.push({
+									pathname: '/create/event',
+									query: { 
+										suggestedTitle: suggestedCategory,
+										suggestedDescription: customIdea
+									}
+								})}
+							>
+								Create New Event
+							</button>
                         </div>
                     </div>
                 </div>
