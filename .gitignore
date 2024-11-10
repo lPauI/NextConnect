@@ -7,3 +7,4 @@ __pycache__/
 .env
 .toml
 secrets.toml
+next-env.d.ts
