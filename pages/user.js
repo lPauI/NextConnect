@@ -12,7 +12,7 @@ import EventsHeatmap from "../components/EventsHeatmap";
 function UserDashboard() {
     const { user, isLoading } = useUser();
     const router = useRouter();
-    const [selectedTags, setSelectedTags] = useState([]);
+    const [selectedTags, setSelectedTags] = useState([]); // Initialize as an empty array
     const [recommendedEvents, setRecommendedEvents] = useState([]);
     const [participatingEvents, setParticipatingEvents] = useState([]);
 
@@ -27,9 +27,9 @@ function UserDashboard() {
         const loadTagsAndEvents = async () => {
             if (user) {
                 const tags = await getParticipantTags(user.sub);
-                setSelectedTags(tags);
+                setSelectedTags(tags || []); // Ensure tags is set as an array
 
-                const recommended = await getEventsByTags(tags);
+                const recommended = await getEventsByTags(tags || []);
                 setRecommendedEvents(recommended);
 
                 const participating = await getUserEvents(user.email);

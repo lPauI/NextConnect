@@ -673,26 +673,35 @@ export const saveParticipantTags = async (auth0UserId, tags, email) => {
     }
 };
 
-// Fetch participant tags from Appwrite
 export const getParticipantTags = async (auth0UserId) => {
     try {
+        console.log("Participant Collection ID:", process.env.NEXT_PUBLIC_PARTICIPANTS_COLLECTION_ID); // Temporary log to debug
+
         const response = await db.listDocuments(
             process.env.NEXT_PUBLIC_DB_ID,
-            process.env.NEXT_PUBLIC_PARTICIPANT_TAGS_COLLECTION_ID,
+            process.env.NEXT_PUBLIC_PARTICIPANTS_COLLECTION_ID,
             [Query.equal("auth0_user_id", auth0UserId)]
         );
         return response.documents[0]?.tags || [];
     } catch (error) {
         console.error("Error fetching participant tags:", error.message);
-        throw new Error("Could not fetch participant tags");
+        //throw new Error("Could not fetch participant tags");
     }
 };
+
 
 // Fetch events matching any of the selected tags
 export const getEventsByTags = async (tags) => {
     try {
+        // Check if tags is an array and has elements
+        if (!Array.isArray(tags) || tags.length === 0) {
+            console.error("No tags provided or tags is not an array:", tags);
+            return [];
+        }
+
         const uniqueEvents = new Map();
 
+        // Iterate over each tag to fetch matching events
         for (const tag of tags) {
             const response = await db.listDocuments(
                 process.env.NEXT_PUBLIC_DB_ID,
@@ -700,10 +709,12 @@ export const getEventsByTags = async (tags) => {
                 [Query.search("tags", tag)]
             );
 
-            // Add each document to the uniqueEvents map using its ID as the key to avoid duplicates
-            response.documents.forEach((event) => {
-                uniqueEvents.set(event.$id, event);
-            });
+            if (response.documents && response.documents.length > 0) {
+                // Add each document to the uniqueEvents map using its ID as the key to avoid duplicates
+                response.documents.forEach((event) => {
+                    uniqueEvents.set(event.$id, event);
+                });
+            }
         }
 
         // Convert the map values to an array to return unique events
@@ -713,6 +724,7 @@ export const getEventsByTags = async (tags) => {
         return [];
     }
 };
+
 
 export const getAllEvents = async () => {
     try {
