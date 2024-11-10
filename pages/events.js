@@ -6,6 +6,7 @@ import Nav from "../components/Nav";
 import { FaUser } from "react-icons/fa";
 import { formatDate } from "../utils/functions";
 import EventTags from "../components/Tags";
+import EventsHeatmap from "../components/EventsHeatmap";
 
 const EventsPage = () => {
   const router = useRouter();
@@ -110,7 +111,7 @@ const EventsPage = () => {
           );
         })}
       </div>
-      <iframe src="https://lpaui-nextconnect-streamlitheatmap-azg4t3.streamlit.app?embedded=true" className="w-full h-screen"></iframe>
+      <EventsHeatmap/>
     </div>
   );
 };

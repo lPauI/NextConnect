@@ -1,6 +1,7 @@
 // pages/user.js
 import { useState, useEffect } from "react";
 import { useUser } from "@auth0/nextjs-auth0/client";
+import { useRouter } from "next/router";
 import { getParticipantTags, saveParticipantTags, getEventsByTags, getUserEvents } from "../utils/functions";
 import { predefinedTags } from "../utils/tags";
 import UserNav from "../components/UserNav";
@@ -8,12 +9,19 @@ import RecommendedEvents from "../components/RecommendedEvents";
 import ParticipatingEvents from "../components/ParticipatingEvents";
 import EventsHeatmap from "../components/EventsHeatmap";
 
-
 function UserDashboard() {
-    const { user } = useUser();
+    const { user, isLoading } = useUser();
+    const router = useRouter();
     const [selectedTags, setSelectedTags] = useState([]);
     const [recommendedEvents, setRecommendedEvents] = useState([]);
     const [participatingEvents, setParticipatingEvents] = useState([]);
+
+    useEffect(() => {
+        // Redirect to login if user is not authenticated and not in loading state
+        if (!isLoading && !user) {
+            router.push("/api/auth/login?returnTo=/user");
+        }
+    }, [user, isLoading, router]);
 
     useEffect(() => {
         const loadTagsAndEvents = async () => {
@@ -44,6 +52,11 @@ function UserDashboard() {
             setRecommendedEvents(recommended);
         }
     };
+
+    // Show a loading state until we know if the user is authenticated or not
+    if (isLoading) {
+        return <div className="p-6">Loading...</div>;
+    }
 
     return (
         <div>
