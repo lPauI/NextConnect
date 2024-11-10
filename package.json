@@ -19,6 +19,7 @@
     "libphonenumber-js": "^1.11.12",
     "next": "^15.0.1",
     "node-fetch": "^3.3.2",
+    "openai": "^4.71.1",
     "opencage-api-client": "^1.0.7",
     "qrcode": "^1.5.4",
     "react": "18.2.0",
