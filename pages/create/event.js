@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import Head from "next/head";
 import Link from "next/link";
 import { checkAuthStatus, createEvent } from "../../utils/functions";
+import { predefinedTags } from "../../utils/tags";
 import { FaArrowLeft } from "react-icons/fa";
 
 const CreateEventPage = () => {
@@ -27,15 +28,6 @@ const CreateEventPage = () => {
     const authenticateUser = useCallback(() => {
         checkAuthStatus(setUser, setLoading, router);
     }, [router]);
-
-    const predefinedTags = [
-        "Education", "Health", "Environment", "Community", "Technology",
-        "LGBTQ+", "Mental Health", "Climate Change", "Social Justice", 
-        "Diversity & Inclusion", "Women's Rights", "Human Rights", 
-        "Sustainability", "Youth Empowerment", "Equal Opportunity", 
-        "Gender Equality", "BLM", "Anti-Racism", "Religion", "Gender & Gender Identity", "Economic Diversity",
-        "Body Positivity", "Culture", "History", "Dissability"
-    ]
 
     useEffect(() => {
         authenticateUser();

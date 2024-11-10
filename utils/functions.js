@@ -621,7 +621,7 @@ export const disableRegistration = async (documentId) => {
 	}
 };
 
-// utils/functions.js
+// DONT TOUCH
 export const getEventTags = async (id) => {
     try {
         const getDoc = await db.getDocument(
@@ -629,8 +629,6 @@ export const getEventTags = async (id) => {
             process.env.NEXT_PUBLIC_EVENTS_COLLECTION_ID,
             id
         );
-
-        // Assuming tags are stored as an array on the document
         const tags = getDoc.tags || [];
 
         return tags;
@@ -641,3 +639,99 @@ export const getEventTags = async (id) => {
     }
 };
 
+export const saveParticipantTags = async (auth0UserId, tags, email) => {
+    try {
+        // Check if the user already has a document in the ParticipantTags collection
+        const existingDoc = await db.listDocuments(
+            process.env.NEXT_PUBLIC_DB_ID,
+            process.env.NEXT_PUBLIC_PARTICIPANT_TAGS_COLLECTION_ID,
+            [Query.equal("auth0_user_id", auth0UserId)]
+        );
+
+        if (existingDoc.total > 0) {
+            // If a document exists, update it
+            await db.updateDocument(
+                process.env.NEXT_PUBLIC_DB_ID,
+                process.env.NEXT_PUBLIC_PARTICIPANT_TAGS_COLLECTION_ID,
+                existingDoc.documents[0].$id,
+                { tags, email }
+            );
+        } else {
+            // If no document exists, create a new one
+            await db.createDocument(
+                process.env.NEXT_PUBLIC_DB_ID,
+                process.env.NEXT_PUBLIC_PARTICIPANT_TAGS_COLLECTION_ID,
+                ID.unique(),
+                { auth0_user_id: auth0UserId, tags, email }
+            );
+        }
+        successMessage("Successfuly saved tags!");
+    } catch (error) {
+        console.error("Error saving participant tags:", error.message);
+        throw new Error("Could not save participant tags");
+    }
+};
+
+// Fetch participant tags from Appwrite
+export const getParticipantTags = async (auth0UserId) => {
+    try {
+        const response = await db.listDocuments(
+            process.env.NEXT_PUBLIC_DB_ID,
+            process.env.NEXT_PUBLIC_PARTICIPANT_TAGS_COLLECTION_ID,
+            [Query.equal("auth0_user_id", auth0UserId)]
+        );
+        return response.documents[0]?.tags || [];
+    } catch (error) {
+        console.error("Error fetching participant tags:", error.message);
+        throw new Error("Could not fetch participant tags");
+    }
+};
+
+// Fetch events matching any of the selected tags
+export const getEventsByTags = async (tags) => {
+    try {
+        const uniqueEvents = new Map();
+
+        for (const tag of tags) {
+            const response = await db.listDocuments(
+                process.env.NEXT_PUBLIC_DB_ID,
+                process.env.NEXT_PUBLIC_EVENTS_COLLECTION_ID,
+                [Query.search("tags", tag)]
+            );
+
+            // Add each document to the uniqueEvents map using its ID as the key to avoid duplicates
+            response.documents.forEach((event) => {
+                uniqueEvents.set(event.$id, event);
+            });
+        }
+
+        // Convert the map values to an array to return unique events
+        return Array.from(uniqueEvents.values());
+    } catch (error) {
+        console.error("Error fetching events by tags:", error);
+        return [];
+    }
+};
+
+
+export const getUserEvents = async (userEmail) => {
+    try {
+        const response = await db.listDocuments(
+            process.env.NEXT_PUBLIC_DB_ID,
+            process.env.NEXT_PUBLIC_EVENTS_COLLECTION_ID
+        );
+
+        // Filter events to find those where the attendees array includes the user’s email
+        const participatingEvents = response.documents.filter(event => {
+            return event.attendees.some(attendee => {
+                const parsedAttendee = JSON.parse(attendee); // parse if attendees are stored as JSON strings
+                return parsedAttendee.email === userEmail;
+            });
+        });
+
+        return participatingEvents;
+    } catch (error) {
+        console.error("Error fetching user events:", error);
+        return [];
+    }
+};
