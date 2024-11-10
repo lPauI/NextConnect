@@ -110,6 +110,7 @@ const EventsPage = () => {
           );
         })}
       </div>
+      <iframe src="https://lpaui-nextconnect-streamlitheatmap-azg4t3.streamlit.app?embedded=true" className="w-full h-screen"></iframe>
     </div>
   );
 };

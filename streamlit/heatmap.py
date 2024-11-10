@@ -1,6 +1,5 @@
 import streamlit as st
 import pandas as pd
-import numpy as np
 import pydeck as pdk
 import os
 import logging
@@ -94,4 +93,7 @@ r = pdk.Deck(
     layers=[heatmap_layer, text_layer], 
     initial_view_state=view_state
 )
+
+st.set_page_config(layout="wide")
+
 st.pydeck_chart(r)
