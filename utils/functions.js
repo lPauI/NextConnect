@@ -745,10 +745,7 @@ export const getUserEvents = async (userEmail) => {
             });
         });
 
-        // Extract tags from participating events
-        const tags = participatingEvents.flatMap(event => event.tags);
-
-        return tags;
+        return participatingEvents;
     } catch (error) {
         console.error("Error fetching user events:", error);
         return [];
