@@ -64,7 +64,7 @@ const EventsPage = () => {
               key={event.$id}
               className="relative md:w-[450px] w-full bg-white rounded-xl shadow-lg transition-transform transform hover:scale-105 hover:shadow-xl m-4 border border-gray-200"
             >
-              <div className="p-6 w-full cursor-pointer rounded-t-xl" onClick={() => router.push(`/events/${event.$id}/${event.slug}`)}>
+              <div className="p-6 w-full cursor-pointer rounded-t-xl">
                 
                 {/* Participant Progress Bar and Count */}
                 <div className="flex items-center justify-center mb-6">

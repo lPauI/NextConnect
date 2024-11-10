@@ -6,6 +6,8 @@ import { predefinedTags } from "../utils/tags";
 import UserNav from "../components/UserNav";
 import RecommendedEvents from "../components/RecommendedEvents";
 import ParticipatingEvents from "../components/ParticipatingEvents";
+import EventsHeatmap from "../components/EventsHeatmap";
+
 
 function UserDashboard() {
     const { user } = useUser();
@@ -77,6 +79,8 @@ function UserDashboard() {
 
                 {/* Render ParticipatingEvents component */}
                 <ParticipatingEvents events={participatingEvents} />
+
+                <EventsHeatmap />
             </div>
         </div>
     );
