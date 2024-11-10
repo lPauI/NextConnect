@@ -1,7 +1,8 @@
 import Head from "next/head";
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
-import { FaHandsHelping, FaLeaf, FaChalkboardTeacher, FaGlobe, FaHeartbeat } from "react-icons/fa";
+import { FaHandsHelping, FaLeaf, FaChalkboardTeacher, FaGlobe, FaHeartbeat} from "react-icons/fa";
+import { MdIncompleteCircle } from "react-icons/md";
 
 export default function Home() {
 	return (
@@ -79,30 +80,30 @@ export default function Home() {
 						</h2>
 						<div className='grid grid-cols-1 md:grid-cols-3 gap-12'>
 							<div className='p-8 rounded-lg shadow-lg bg-white hover:shadow-xl transition-all duration-300'>
-								<FaHandsHelping className='text-4xl text-blue-600 mb-4 mx-auto' />
+								<MdIncompleteCircle className='text-4xl text-blue-600 mb-4 mx-auto' />
 								<h3 className='text-2xl font-semibold text-blue-600 mb-4'>
-									Community Outreach
+								Find Events
 								</h3>
 								<p className='text-gray-600'>
-									Work directly with communities to uplift and empower through education, health services, and social support.
+								Browse meetups, parties, workshops, and more.
 								</p>
 							</div>
 							<div className='p-8 rounded-lg shadow-lg bg-white hover:shadow-xl transition-all duration-300'>
 								<FaLeaf className='text-4xl text-blue-600 mb-4 mx-auto' />
 								<h3 className='text-2xl font-semibold text-blue-600 mb-4'>
-									Environmental Care
+								Join a Community
 								</h3>
 								<p className='text-gray-600'>
-									Engage in conservation activities such as clean-up drives and reforestation efforts to protect our planet.
+								Connect with people based on your interests, identity, or location.
 								</p>
 							</div>
 							<div className='p-8 rounded-lg shadow-lg bg-white hover:shadow-xl transition-all duration-300'>
 								<FaChalkboardTeacher className='text-4xl text-blue-600 mb-4 mx-auto' />
 								<h3 className='text-2xl font-semibold text-blue-600 mb-4'>
-									Educational Support
+								Host Your Event
 								</h3>
 								<p className='text-gray-600'>
-									Support students through tutoring, mentorship, and educational programs that promote learning and growth.
+								Organize your own event and reach a supportive audience.
 								</p>
 							</div>
 						</div>
@@ -114,7 +115,14 @@ export default function Home() {
 					<div className='container mx-auto px-6 md:px-12 text-center'>
 						<h2 className='text-3xl md:text-4xl font-extrabold mb-4'>Our Impact</h2>
 						<p className='text-lg md:text-xl max-w-2xl mx-auto mb-10'>
-						With the dedication of countless volunteers contributing thousands of hours, NextConnect will bring hope, support, and growth to communities across the globe.
+						We believe in the power of inclusion to create a society where every individual feels valued and respected. Embracing our differences strengthens our communities, fosters empathy, and allows us all to grow together. Together, we can build a world where everyone belongs.
+
+
+
+
+
+
+
 						</p>
 						<a
 							href='/about'

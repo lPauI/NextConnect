@@ -11,7 +11,7 @@ const About = () => {
       <section className="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white py-20 text-center px-6">
         <h1 className="text-5xl font-bold">About Us</h1>
         <p className="mt-4 text-xl">
-          Empowering volunteers to easily manage their events for unforgettable experiences.
+        We believe in the power of connection. Nextconnect is here to create a world where everyone feels welcomed and valued, regardless of background or identity.
         </p>
       </section>
 
@@ -20,21 +20,21 @@ const About = () => {
         <h2 className="text-3xl font-semibold text-center lg:col-span-3">Our Core Values</h2>
         <div className="flex flex-col items-center p-6 bg-white rounded-lg shadow-lg">
           <img src="/images/icon-quality.svg" alt="Quality" className="h-16 mb-4" />
-          <h3 className="text-xl font-bold mb-2 ">Quality Experience</h3>
+          <h3 className="text-xl font-bold mb-2 ">Inclusion</h3>
           <p className="text-gray-600 text-center">
-            We provide a seamless experience for our customers with a focus on reliability and convenience.
+          Making space for everyone, no matter who they are or where they come from.
           </p>
         </div>
         <div className="flex flex-col items-center p-6 bg-white rounded-lg shadow-lg">
           <img src="/images/icon-innovation.svg" alt="Innovation" className="h-16 mb-4" />
-          <h3 className="text-xl font-bold mb-2">Innovation</h3>
+          <h3 className="text-xl font-bold mb-2">Community Support</h3>
           <p className="text-gray-600 text-center">
-            Our platform is built with cutting-edge technologies for a smooth booking experience.
+          Building a network of support, so no one feels alone.
           </p>
         </div>
         <div className="flex flex-col items-center p-6 bg-white rounded-lg shadow-lg">
           <img src="/images/icon-support.svg" alt="Support" className="h-16 mb-4" />
-          <h3 className="text-xl font-bold mb-2">Dedicated Support</h3>
+          <h3 className="text-xl font-bold mb-2">Unity in Diversity</h3>
           <p className="text-gray-600 text-center">
             Our team is here to assist you at every step, ensuring a hassle-free experience.
           </p>
