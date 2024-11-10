@@ -33,7 +33,7 @@ const Dashboard = () => {
 				<title>Dashboard | NextConnect</title>
 				<meta
 					name='description'
-					content='Take your volunteering event to the Next level with NextConnect'
+					content='Take your events to the Next level with NextConnect'
 				/>
 				<meta name='viewport' content='width=device-width, initial-scale=1' />
 				<link rel='icon' href='/images/favicon.ico' />

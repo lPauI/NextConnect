@@ -52,31 +52,31 @@ const About = () => {
       <div className="bg-white rounded-lg shadow-lg p-6">
         <img src="/images/team-member-1.png" alt="Cimbru Darius" className="h-32 w-32 rounded-full mx-auto object-cover" />
         <h3 className="text-xl font-bold mt-4">Cimbru Darius</h3>
-        <p className="text-gray-600">Head Developer</p>
+        <p className="text-gray-600">Lead Developer</p>
       </div>
       
       <div className="bg-white rounded-lg shadow-lg p-6">
         <img src="/images/team-member-2.png" alt="Lascu Paul" className="h-32 w-32 rounded-full mx-auto object-cover" />
         <h3 className="text-xl font-bold mt-4">Lascu Paul</h3>
-        <p className="text-gray-600">Software Engineer</p>
+        <p className="text-gray-600">Developer</p>
       </div>
       
       <div className="bg-white rounded-lg shadow-lg p-6">
         <img src="/images/team-member-3.png" alt="Barbu Razvan" className="h-32 w-32 rounded-full mx-auto object-cover" />
         <h3 className="text-xl font-bold mt-4">Barbu Razvan</h3>
-        <p className="text-gray-600">AI Developer</p>
+        <p className="text-gray-600">Diversity & Inclusion Specialist</p>
       </div>
 
       <div className="bg-white rounded-lg shadow-lg p-6">
         <img src="/images/team-member-4.jpg" alt="Alex Cortojan" className="h-32 w-32 rounded-full mx-auto object-cover" />
         <h3 className="text-xl font-bold mt-4">Alex Cortojan</h3>
-        <p className="text-gray-600">Developer</p>
+        <p className="text-gray-600">UX/UI Designer</p>
       </div>
       
       <div className="bg-white rounded-lg shadow-lg p-6">
         <img src="/images/team-member-5.png" alt="Erol Ciucur" className="h-32 w-32 rounded-full mx-auto object-cover" />
         <h3 className="text-xl font-bold mt-4">Erol Ciucur</h3>
-        <p className="text-gray-600">Developer</p>
+        <p className="text-gray-600">Event Coordinator</p>
       </div>
     </div>
   </div>
@@ -88,11 +88,11 @@ const About = () => {
         <h2 className="text-3xl font-semibold text-center">What Our Users Say</h2>
         <div className="mt-8 space-y-8">
           <div className="bg-white rounded-lg shadow-md p-6">
-            <p className="text-gray-700 italic">"A seamless experience from start to finish!"</p>
+            <p className="text-gray-700 italic">"Nextconnect gave me a space where I can be myself and connect with others who understand my journey. It’s been life-changing"</p>
             <p className="text-right mt-4 text-purple-700 font-semibold">– Alex Johnson</p>
           </div>
           <div className="bg-white rounded-lg shadow-md p-6">
-            <p className="text-gray-700 italic">"Changing the world has never been easier."</p>
+            <p className="text-gray-700 italic">"Finding a community that celebrates diversity has never been this easy. I feel seen and valued here."</p>
             <p className="text-right mt-4 text-purple-700 font-semibold">– Maria Gomez</p>
           </div>
           {/* Add more testimonials */}

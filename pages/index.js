@@ -23,10 +23,9 @@ export default function Home() {
 				<Nav />
 				{/* Hero Section */}
 				<section className="h-dvh flex flex-col justify-center items-center text-center bg-gradient-to-r from-purple-600 to-purple-700 text-white p-6 animated-gradient">
-					<h1 className="text-5xl md:text-6xl font-bold mb-4 animate-fade-in-up">Connect, Volunteer, Impact</h1>
+					<h1 className="text-5xl md:text-6xl font-bold mb-4 animate-fade-in-up">Connect, Include, Belong</h1>
 					<p className="text-xl md:text-2xl max-w-2xl mx-auto mb-8 animate-fade-in-up delay-100">
-						NextConnect brings passionate people together to make a lasting difference.
-						Join us in empowering communities, protecting our planet, and building a brighter future.
+						NextConnect brings together diverse communities, creating safe and empowering spaces for everyone, especially minorities, to connect and thrive. Join us in fostering inclusivity, celebrating identity, and building a world where everyone truly belongs.
 					</p>
 					<div className="flex gap-6 mt-4">
 						<button
@@ -51,29 +50,27 @@ export default function Home() {
 							What Makes Us Unique
 						</h2>
 						<p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto mb-12 animate-fade-in delay-100">
-							NextConnect redefines volunteering by connecting individuals with meaningful causes
-							that match their talents. With us, volunteering is more than just giving back; it’s
-							about building a supportive community and creating real change.
+						Nextconnect redefines social connection by creating spaces for all individuals, especially minorities, to belong, connect, and celebrate their identities. Here, inclusion goes beyond simple acceptance—it’s about building a supportive community where everyone is valued and diversity is embraced.
 						</p>
 						<div className="flex flex-col md:flex-row justify-center gap-8">
 							{[
 								{
 									icon: <FaHandsHelping />,
-									title: "Collaborative Projects",
+									title: "Collaborative Spaces",
 									description:
-										"We bring people together to achieve more through collaboration, turning individual actions into powerful change.",
+										"We bring people from all backgrounds together, fostering connections through shared experiences and mutual respect.",
 								},
 								{
 									icon: <FaHeartbeat />,
-									title: "Sustainable Impact",
+									title: "Meaningful Impact",
 									description:
-										"Our focus is on projects that make a lasting difference, prioritizing sustainability and community welfare.",
+										"Our focus is on creating events and connections that make a lasting difference in the lives of LGBTQ+ individuals, ethnic minorities, people with disabilities, and all those seeking a welcoming community.",
 								},
 								{
 									icon: <FaGlobe />,
-									title: "Global Reach",
+									title: "Expanding Connections",
 									description:
-										"Our platform connects volunteers from around the world, expanding the impact of each project beyond borders.",
+										"Our platform connects people locally and globally, empowering individuals to find inclusive events and communities across different cities and cultures.",
 								},
 							].map((item, index) => (
 								<div
@@ -102,7 +99,7 @@ export default function Home() {
 								Find Events
 								</h3>
 								<p className='text-gray-600'>
-								Browse meetups, parties, workshops, and more.
+								Browse a wide variety of events tailored for diverse communities—whether you’re looking for LGBTQ+ meetups, cultural celebrations, support groups, workshops, or just a fun night out. 
 								</p>
 							</div>
 							<div className='p-8 rounded-lg shadow-lg bg-white hover:shadow-xl transition-all duration-300'>
@@ -143,7 +140,7 @@ export default function Home() {
 						</p>
 						<button
 							onClick={() => router.push("/about")}
-							className="px-10 py-4 bg-white text-black font-semibold rounded-full shadow-lg hover:bg-purple-700 transition-all duration-300 animate-bounce delay-200"
+							className="px-10 py-4 bg-white text-black font-semibold rounded-full shadow-lg hover:bg-purple-700 hover:text-white transition-all duration-300 animate-bounce delay-200"
 						>
 							Who we are
 						</button>
