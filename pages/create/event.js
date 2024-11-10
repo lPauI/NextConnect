@@ -7,6 +7,8 @@ import { useRouter } from "next/router";
 import Head from "next/head";
 import Link from "next/link";
 import { checkAuthStatus, createEvent } from "../../utils/functions";
+import { predefinedTags } from "../../utils/tags";
+import { FaArrowLeft } from "react-icons/fa";
 
 const CreateEventPage = () => {
     const [user, setUser] = useState({});
@@ -17,8 +19,8 @@ const CreateEventPage = () => {
     const [description, setDescription] = useState("");
     const [note, setNote] = useState("");
     const [flier, setFlier] = useState(null);
-    const [numParticipants, setNumParticipants] = useState(1); 
-    const [selectedTags, setSelectedTags] = useState([]); // Initialize selectedTags
+    const [numParticipants, setNumParticipants] = useState(1);
+    const [selectedTags, setSelectedTags] = useState([]);
     const [mapUrl, setMapUrl] = useState("");
     const [loading, setLoading] = useState(true);
     const router = useRouter();
@@ -26,8 +28,6 @@ const CreateEventPage = () => {
     const authenticateUser = useCallback(() => {
         checkAuthStatus(setUser, setLoading, router);
     }, [router]);
-
-    const predefinedTags = ["Education", "Health", "Environment", "Community", "Technology"];
 
     useEffect(() => {
         authenticateUser();
@@ -49,8 +49,6 @@ const CreateEventPage = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        // Create the event
         const eventId = await createEvent(
             user.$id,
             title,
@@ -60,11 +58,10 @@ const CreateEventPage = () => {
             description,
             note,
             flier,
-            selectedTags, // Use selectedTags here
+            selectedTags,
             numParticipants,
             router
         );
-
         router.push(`/dashboard`);
     };
 
@@ -77,14 +74,19 @@ const CreateEventPage = () => {
                     <meta name="description" content="Create a new event on NextConnect" />
                     <link rel="icon" href="/images/favicon.ico" />
                 </Head>
-                <main className="bg-white p-8 rounded shadow-md w-full max-w-lg">
-                    <h2 className="text-3xl font-bold text-center mb-6 text-blue-600">
-                        Create a New Event
-                    </h2>
+                <main className="bg-white p-8 rounded shadow-md w-full max-w-lg relative">
+                    {/* Back to Dashboard Button */}
+                    <button
+                        onClick={() => router.push("/dashboard")}
+                        className="flex items-center mb-4 text-blue-500 hover:text-blue-700 font-semibold absolute top-4 left-4"
+                    >
+                        <FaArrowLeft className="mr-2" /> Back to Dashboard
+                    </button>
+                    <h2 className="text-3xl font-bold text-center mb-6 text-blue-600 pt-5">🎉 Create a New Event</h2>
                     <form className="flex flex-col" onSubmit={handleSubmit}>
                         {/* Title */}
                         <label htmlFor="title" className="font-semibold text-gray-700 mb-2">
-                            Title
+                            📝 Event Title
                         </label>
                         <input
                             name="title"
@@ -97,7 +99,7 @@ const CreateEventPage = () => {
 
                         {/* Venue */}
                         <label htmlFor="venue" className="font-semibold text-gray-700 mb-2">
-                            Venue
+                            📍 Venue
                         </label>
                         <input
                             name="venue"
@@ -126,7 +128,7 @@ const CreateEventPage = () => {
 
                         {/* Time */}
                         <label htmlFor="time" className="font-semibold text-gray-700 mb-2">
-                            Time
+                            ⏰ Time
                         </label>
                         <input
                             name="time"
@@ -139,18 +141,19 @@ const CreateEventPage = () => {
 
                         {/* Date */}
                         <label htmlFor="date" className="font-semibold text-gray-700 mb-2">
-                            Date
+                            📅 Date
                         </label>
                         <DatePicker
                             selected={date}
                             onChange={(date) => setDate(date)}
                             className="border py-2 px-4 rounded mb-4 focus:border-blue-500 w-full"
+                            minDate={new Date()}
                             required
                         />
 
                         {/* Description */}
                         <label htmlFor="description" className="font-semibold text-gray-700 mb-2">
-                            Event Description
+                            🖊️ Event Description
                         </label>
                         <textarea
                             name="description"
@@ -163,7 +166,7 @@ const CreateEventPage = () => {
 
                         {/* Note */}
                         <label htmlFor="note" className="font-semibold text-gray-700 mb-2">
-                            Note to Attendees
+                            📢 Note to Attendees
                         </label>
                         <textarea
                             name="note"
@@ -175,15 +178,17 @@ const CreateEventPage = () => {
                         />
 
                         {/* Tags */}
-                        <label className="font-semibold text-gray-700 mb-2">Tags</label>
+                        <label className="font-semibold text-gray-700 mb-2">🏷️ Tags</label>
                         <div className="flex flex-wrap gap-2 mb-4">
                             {predefinedTags.map((tag) => (
                                 <button
                                     type="button"
                                     key={tag}
                                     onClick={() => handleTagClick(tag)}
-                                    className={`px-3 py-1 rounded-full border ${
-                                        selectedTags.includes(tag) ? "bg-blue-600 text-white" : "bg-gray-200"
+                                    className={`px-3 py-1 rounded-full border transition-all duration-300 ${
+                                        selectedTags.includes(tag)
+                                            ? "bg-blue-600 text-white hover:bg-blue-500"
+                                            : "bg-gray-200 hover:bg-gray-300"
                                     }`}
                                 >
                                     {tag}
@@ -193,7 +198,7 @@ const CreateEventPage = () => {
 
                         {/* Participants */}
                         <label htmlFor="numParticipants" className="font-semibold text-gray-700 mb-2">
-                            Number of Participants Required
+                            👥 Number of Participants Required
                         </label>
                         <input
                             name="numParticipants"
@@ -207,7 +212,7 @@ const CreateEventPage = () => {
 
                         {/* Flier */}
                         <label htmlFor="file" className="font-semibold text-gray-700 mb-2">
-                            Event Flier (optional)
+                            📄 Event Flier (optional)
                         </label>
                         <input
                             type="file"
@@ -222,7 +227,7 @@ const CreateEventPage = () => {
                             type="submit"
                             className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition-all duration-200 font-semibold"
                         >
-                            Create Event
+                            Create Event 
                         </button>
                     </form>
                 </main>

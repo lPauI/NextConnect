@@ -3,7 +3,8 @@ import { account, db, storage } from "./appwrite";
 import { toast } from "react-toastify";
 import { ID, Query } from "appwrite";
 import emailjs from "@emailjs/browser";
-import QRCode from "qrcode"; // Ensure QRCode is imported correctly
+import QRCode from "qrcode"; 
+import opencage from 'opencage-api-client';
 
 //👇🏻 generate random strings as ID
 const generateID = () => Math.random().toString(36).substring(2, 24);
@@ -276,6 +277,38 @@ export const checkAuthStatusDashboard = async (setUser, setLoading, setEvents, r
     }
 };
 
+export const setVenueCoordinates = async (eventId, venue) => {
+    const apiKey = process.env.NEXT_PUBLIC_OPENCAGE_KEY; // Ensure your .env file has the correct key without quotes
+
+    try {
+        // Fetch coordinates using opencage-api-client
+        const data = await opencage.geocode({ q: venue, key: apiKey });
+
+        if (data && data.results && data.results.length > 0) {
+            const { lat, lng } = data.results[0].geometry;
+
+            // Update the event document with coordinates in Appwrite, converting lat and lng to strings
+            await db.updateDocument(
+                process.env.NEXT_PUBLIC_DB_ID,
+                process.env.NEXT_PUBLIC_EVENTS_COLLECTION_ID,
+                eventId,
+                {
+                    VENUE_LAT: lat.toString(),
+                    VENUE_LONG: lng.toString(),
+                }
+            );
+            console.log("Coordinates set successfully!");
+        } else {
+            console.error("No coordinates found for the specified venue.", data);
+        }
+    } catch (error) {
+        console.log("OpenCage API Key:", apiKey);
+        console.error("Error fetching or updating coordinates:", error.message);
+        errorMessage("Failed to fetch or set coordinates for venue ❌");
+    }
+};
+
+
 //👇🏻 create a new event
 export const createEvent = async (
     userId,
@@ -287,7 +320,7 @@ export const createEvent = async (
     note,
     flier,
     tags,
-    participants, // New parameter for participants required
+    participants,
     router
 ) => {
     const createDocument = async (flier_url = "https://google.com") => {
@@ -312,6 +345,10 @@ export const createEvent = async (
                     participants: parseInt(participants, 10), // Ensuring the value is an integer
                 }
             );
+
+            // Call the function to set coordinates after creating the event
+            await setVenueCoordinates(response.$id, venue);
+
             successMessage("Event created successfully 🎉");
             return response.$id;
         } catch (error) {
@@ -584,7 +621,7 @@ export const disableRegistration = async (documentId) => {
 	}
 };
 
-// utils/functions.js
+// DONT TOUCH
 export const getEventTags = async (id) => {
     try {
         const getDoc = await db.getDocument(
@@ -592,14 +629,109 @@ export const getEventTags = async (id) => {
             process.env.NEXT_PUBLIC_EVENTS_COLLECTION_ID,
             id
         );
-
-        // Assuming tags are stored as an array on the document
         const tags = getDoc.tags || [];
 
         return tags;
     } catch (err) {
         errorMessage("Unable to fetch event tags ❌");
         console.error(err);
+        return [];
+    }
+};
+
+export const saveParticipantTags = async (auth0UserId, tags, email) => {
+    try {
+        // Check if the user already has a document in the ParticipantTags collection
+        const existingDoc = await db.listDocuments(
+            process.env.NEXT_PUBLIC_DB_ID,
+            process.env.NEXT_PUBLIC_PARTICIPANT_TAGS_COLLECTION_ID,
+            [Query.equal("auth0_user_id", auth0UserId)]
+        );
+
+        if (existingDoc.total > 0) {
+            // If a document exists, update it
+            await db.updateDocument(
+                process.env.NEXT_PUBLIC_DB_ID,
+                process.env.NEXT_PUBLIC_PARTICIPANT_TAGS_COLLECTION_ID,
+                existingDoc.documents[0].$id,
+                { tags, email }
+            );
+        } else {
+            // If no document exists, create a new one
+            await db.createDocument(
+                process.env.NEXT_PUBLIC_DB_ID,
+                process.env.NEXT_PUBLIC_PARTICIPANT_TAGS_COLLECTION_ID,
+                ID.unique(),
+                { auth0_user_id: auth0UserId, tags, email }
+            );
+        }
+        successMessage("Successfuly saved tags!");
+    } catch (error) {
+        console.error("Error saving participant tags:", error.message);
+        throw new Error("Could not save participant tags");
+    }
+};
+
+// Fetch participant tags from Appwrite
+export const getParticipantTags = async (auth0UserId) => {
+    try {
+        const response = await db.listDocuments(
+            process.env.NEXT_PUBLIC_DB_ID,
+            process.env.NEXT_PUBLIC_PARTICIPANT_TAGS_COLLECTION_ID,
+            [Query.equal("auth0_user_id", auth0UserId)]
+        );
+        return response.documents[0]?.tags || [];
+    } catch (error) {
+        console.error("Error fetching participant tags:", error.message);
+        throw new Error("Could not fetch participant tags");
+    }
+};
+
+// Fetch events matching any of the selected tags
+export const getEventsByTags = async (tags) => {
+    try {
+        const uniqueEvents = new Map();
+
+        for (const tag of tags) {
+            const response = await db.listDocuments(
+                process.env.NEXT_PUBLIC_DB_ID,
+                process.env.NEXT_PUBLIC_EVENTS_COLLECTION_ID,
+                [Query.search("tags", tag)]
+            );
+
+            // Add each document to the uniqueEvents map using its ID as the key to avoid duplicates
+            response.documents.forEach((event) => {
+                uniqueEvents.set(event.$id, event);
+            });
+        }
+
+        // Convert the map values to an array to return unique events
+        return Array.from(uniqueEvents.values());
+    } catch (error) {
+        console.error("Error fetching events by tags:", error);
+        return [];
+    }
+};
+
+
+export const getUserEvents = async (userEmail) => {
+    try {
+        const response = await db.listDocuments(
+            process.env.NEXT_PUBLIC_DB_ID,
+            process.env.NEXT_PUBLIC_EVENTS_COLLECTION_ID
+        );
+
+        // Filter events to find those where the attendees array includes the user’s email
+        const participatingEvents = response.documents.filter(event => {
+            return event.attendees.some(attendee => {
+                const parsedAttendee = JSON.parse(attendee); // parse if attendees are stored as JSON strings
+                return parsedAttendee.email === userEmail;
+            });
+        });
+
+        return participatingEvents;
+    } catch (error) {
+        console.error("Error fetching user events:", error);
         return [];
     }
 };

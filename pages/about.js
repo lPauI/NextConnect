@@ -42,47 +42,46 @@ const About = () => {
       </section>
 
       {/* Meet the Team Section */}
-      <section className="w-full bg-gray-100 py-16 px-6">
-        <div className="max-w-6xl mx-auto text-center">
-          <h2 className="text-3xl font-semibold">Meet Our Team</h2>
-          <p className="text-gray-700 mt-2 mb-8">
-            A passionate team working together to create a remarkable platform.
-          </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div className="bg-white rounded-lg shadow-lg p-6">
-              <img src="/images/team-member-1.png" alt="Team Member" className="h-32 w-32 rounded-full mx-auto" />
-              <h3 className="text-xl font-bold mt-4">Cimbru Darius</h3>
-              <p className="text-gray-600">~Head Developer~</p>
-            </div>
-            <div className="bg-white rounded-lg shadow-lg p-6">
-              <img src="/images/team-member-2.png" alt="Team Member"className="h-32 w-32 rounded-full mx-auto object-cover object-center" />
-              <h3 className="text-xl font-bold mt-4">Lascu Paul</h3>
-              <p className="text-gray-600">~Software Engineer~</p>
-            </div>
-            <div className="bg-white rounded-lg shadow-lg p-6">
-              <img src="/images/team-member-3.png" alt="razvan" className="h-32 w-32 rounded-full mx-auto" />
-              <h3 className="text-xl font-bold mt-4">Barbu Razvan</h3>
-              <p className="text-gray-600">~AI Developer~</p>
-              {/*INSERT IMAGES INTO PUBLIC/IMAGES !*/}
-              </div>
-                      <div className="bg-white rounded-lg shadow-lg p-6">
-              <img 
-                  src="/images/team-member-4.jpg" 
-                  alt="Team Member" 
-                  className="h-32 w-32 rounded-full mx-auto object-cover object-center"
-              />
-              <h3 className="text-xl font-bold mt-4">Alex Cortojan</h3>
-              <p className="text-gray-600">~AI Developer~</p>
-              </div>
+<section className="w-full bg-gray-100 py-16 px-6">
+  <div className="max-w-6xl mx-auto text-center">
+    <h2 className="text-3xl font-semibold">Meet Our Team</h2>
+    <p className="text-gray-700 mt-2 mb-8">
+      A passionate team working together to create a remarkable platform.
+    </p>
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8">
+      <div className="bg-white rounded-lg shadow-lg p-6">
+        <img src="/images/team-member-1.png" alt="Cimbru Darius" className="h-32 w-32 rounded-full mx-auto object-cover" />
+        <h3 className="text-xl font-bold mt-4">Cimbru Darius</h3>
+        <p className="text-gray-600">Head Developer</p>
+      </div>
+      
+      <div className="bg-white rounded-lg shadow-lg p-6">
+        <img src="/images/team-member-2.png" alt="Lascu Paul" className="h-32 w-32 rounded-full mx-auto object-cover" />
+        <h3 className="text-xl font-bold mt-4">Lascu Paul</h3>
+        <p className="text-gray-600">Software Engineer</p>
+      </div>
+      
+      <div className="bg-white rounded-lg shadow-lg p-6">
+        <img src="/images/team-member-3.png" alt="Barbu Razvan" className="h-32 w-32 rounded-full mx-auto object-cover" />
+        <h3 className="text-xl font-bold mt-4">Barbu Razvan</h3>
+        <p className="text-gray-600">AI Developer</p>
+      </div>
 
-            <div className="bg-white rounded-lg shadow-lg p-6">
-              <img src="/images/team-member-5.png" alt=""className="h-32 w-32 rounded-full mx-auto object-cover object-center" />
-              <h3 className="text-xl font-bold mt-4">Erol Ciucur</h3>
-              <p className="text-gray-600">~Developer~</p>
-            </div>
-          </div>
-        </div>
-      </section>
+      <div className="bg-white rounded-lg shadow-lg p-6">
+        <img src="/images/team-member-4.jpg" alt="Alex Cortojan" className="h-32 w-32 rounded-full mx-auto object-cover" />
+        <h3 className="text-xl font-bold mt-4">Alex Cortojan</h3>
+        <p className="text-gray-600">Developer</p>
+      </div>
+      
+      <div className="bg-white rounded-lg shadow-lg p-6">
+        <img src="/images/team-member-5.png" alt="Erol Ciucur" className="h-32 w-32 rounded-full mx-auto object-cover" />
+        <h3 className="text-xl font-bold mt-4">Erol Ciucur</h3>
+        <p className="text-gray-600">Developer</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 
       {/* Testimonials Section */}
       <section className="max-w-6xl mx-auto py-16 px-6">
