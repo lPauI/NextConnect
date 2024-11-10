@@ -3,6 +3,7 @@ import Nav from "../components/Nav";
 import Footer from "../components/Footer";
 import { FaHandsHelping, FaLeaf, FaChalkboardTeacher, FaGlobe, FaHeartbeat} from "react-icons/fa";
 import { MdIncompleteCircle } from "react-icons/md";
+import {useRouter} from 'next/router'
 
 export default function Home() {
 	const router = useRouter();
