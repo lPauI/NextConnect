@@ -713,6 +713,22 @@ export const getEventsByTags = async (tags) => {
     }
 };
 
+export const getAllEvents = async () => {
+    try {
+        const response = await db.listDocuments(
+            process.env.NEXT_PUBLIC_DB_ID,
+            process.env.NEXT_PUBLIC_EVENTS_COLLECTION_ID
+        );
+
+        // Extract tags from all events
+        const tags = response.documents.flatMap(event => event.tags);
+
+        return tags;
+    } catch (error) {
+        console.error("Error fetching all events:", error);
+        return [];
+    }
+};
 
 export const getUserEvents = async (userEmail) => {
     try {
@@ -729,7 +745,10 @@ export const getUserEvents = async (userEmail) => {
             });
         });
 
-        return participatingEvents;
+        // Extract tags from participating events
+        const tags = participatingEvents.flatMap(event => event.tags);
+
+        return tags;
     } catch (error) {
         console.error("Error fetching user events:", error);
         return [];
