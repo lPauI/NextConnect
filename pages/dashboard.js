@@ -4,10 +4,10 @@ import NoEvent from "../components/NoEvent";
 import Loading from "../components/Loading";
 import SideNav from "../components/SideNav";
 import AuthNav from "../components/AuthNav";
-import { checkAuthStatusDashboard } from "../utils/functions";
+import { checkAuthStatusDashboard, getAllEvents } from "../utils/functions";
 import { useRouter } from "next/router";
 import Events from "../components/Events";
-import { getAllEvents } from "../utils/functions";
+import axios from 'axios';
 
 const Dashboard = () => {
     const router = useRouter();
@@ -15,6 +15,7 @@ const Dashboard = () => {
     const [events, setEvents] = useState([]);
     const [user, setUser] = useState({});
     const [suggestedCategory, setSuggestedCategory] = useState("");
+    const [customIdea, setCustomIdea] = useState("");
 
     const authenticateUser = useCallback(async () => {
         const isAuthenticated = await checkAuthStatusDashboard(setUser, setLoading, setEvents, router);
@@ -43,15 +44,20 @@ const Dashboard = () => {
             if (topTags.length === 0) {
                 console.error("No tags found.");
                 setSuggestedCategory("No categories available");
+                setCustomIdea("No idea available at the moment.");
                 return;
             }
 
             const randomTag = topTags[Math.floor(Math.random() * topTags.length)];
             console.log("Randomly selected tag:", randomTag);
-
             setSuggestedCategory(randomTag);
+
+            const response = await axios.post('/api/getCustomIdea', { category: randomTag });
+            console.log("Custom idea response:", response.data);
+            setCustomIdea(response.data.idea);
         } catch (error) {
-            console.error("Error in getTopTag:", error);
+            console.error("Error in getTopTag:", error.response ? error.response.data : error.message);
+            setCustomIdea("No idea available at the moment.");
         }
     };
 
@@ -59,6 +65,10 @@ const Dashboard = () => {
         authenticateUser();
         getTopTag();
     }, [authenticateUser]);
+
+    if (loading) {
+        return <Loading />;
+    }
 
     return (
         <div>
@@ -84,8 +94,8 @@ const Dashboard = () => {
                     <div className='md:w-[80%] w-full min-h-[90vh] py-10 px-4'>
                         <div className='bg-white shadow-md rounded-lg p-6'>
                             <h2 className='text-2xl font-bold mb-4'>Suggested Event</h2>
-                            <p className='mb-4'>I suggest you create an event in category {suggestedCategory}.</p>
-                            <p className='mb-8'>Details: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p> {/* TODO */}
+                            <p className='mb-4'>I suggest you create an event in category <strong>{suggestedCategory}</strong>.</p>
+                            <p className='mb-8'>Details: {customIdea}</p>
                             <button
                                 className='bg-blue-500 text-white px-4 py-2 rounded'
                                 onClick={() => router.push('/create/event')}
