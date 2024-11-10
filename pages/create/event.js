@@ -107,8 +107,9 @@ const CreateEventPage = () => {
                         <FaArrowLeft className="mr-2" />
                         Back
                     </button>
-
+                    
                     <form onSubmit={handleSubmit} className="space-y-6 bg-white p-6 rounded-lg shadow">
+                    <h1 className="text-3xl md:text-4xl font-extrabold text-center">Create an event</h1>
                         <div>
                             <label className="block text-sm font-medium text-gray-700">
                                 Event Title
