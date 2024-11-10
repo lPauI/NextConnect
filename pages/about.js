@@ -74,9 +74,9 @@ const About = () => {
       </div>
       
       <div className="bg-white rounded-lg shadow-lg p-6">
-        <img src="/images/team-member-5.png" alt="Erol Ciucur" className="h-32 w-32 rounded-full mx-auto object-cover" />
+        <img src="/images/team-member-6.png" alt="Erol Ciucur" className="h-32 w-32 rounded-full mx-auto object-cover" />
         <h3 className="text-xl font-bold mt-4">Erol Ciucur</h3>
-        <p className="text-gray-600">Event Coordinator</p>
+        <p className="text-gray-600">Developer</p>
       </div>
     </div>
   </div>

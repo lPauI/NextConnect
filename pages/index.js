@@ -11,10 +11,10 @@ export default function Home() {
 	return (
 		<>
 			<Head>
-				<title>NextConnect - Volunteering for a Better World</title>
+				<title>NextConnect</title>
 				<meta
 					name="description"
-					content="Join our mission to make a difference through volunteering and community support."
+					content="Join our mission to make a difference through community support."
 				/>
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 				<link rel="icon" href="/images/favicon.ico" />

@@ -87,7 +87,7 @@ const Dashboard = () => {
                     <div className='md:w-[20%] md:block hidden'>
                         <SideNav />
                     </div>
-                    <div className='md:w-[80%] w-full min-h-[90vh] py-10 px-4'>
+                    <div className='md:w-[80%] w-full min-h-[90vh] py-10 px-4 ml-14'>
                         {events.length > 0 ? <Events events={events} /> : <NoEvent />}
                     </div>
 
