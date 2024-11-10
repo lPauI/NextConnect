@@ -51,13 +51,13 @@ const Component = ({ event }) => {
 				<link rel='icon' href='/images/favicon.ico' />
 			</Head>
 			<main>
-				<div className='h-[45vh] p-3 flex flex-col items-center justify-center bg-blue-600 registergray w-full '>
+				<div className='h-[45vh] p-3 flex flex-col items-center justify-center bg-purple-600 registergray w-full '>
 					<h2 className='text-4xl font-extrabold mb-4 text-center text-white'>
 						{event.title}
 					</h2>
 					<button
 							onClick={() => router.push(`/edit/${event.$id}`)}
-							className="p-2 bg-blue-600 text-white rounded mt-4"
+							className="p-2 bg-purple-600 text-white rounded mt-4"
 					>
 						Edit Event
 					</button>

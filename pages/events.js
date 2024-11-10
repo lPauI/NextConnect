@@ -51,7 +51,7 @@ const EventsPage = () => {
   return (
     <div className="container mx-auto p-4">
       <Nav />
-      <h1 className="text-3xl font-semibold text-blue-600 mb-6">Upcoming Events</h1>
+      <h1 className="text-3xl font-semibold text-purple-600 mb-6">Upcoming Events</h1>
       <div className="w-full flex flex-wrap items-center justify-center p-4">
         {events.map((event) => {
           const totalParticipants = event.participants || 0;
@@ -71,7 +71,7 @@ const EventsPage = () => {
                 <div className="flex items-center justify-center mb-6">
                   <div className="relative w-full h-8 bg-gray-200 rounded-full overflow-hidden shadow-inner">
                     <div 
-                      className="absolute top-0 left-0 h-full bg-gradient-to-r from-blue-500 to-indigo-500 transition-all duration-500 ease-out"
+                      className="absolute top-0 left-0 h-full bg-gradient-to-r from-purple-500 to-indigo-500 transition-all duration-500 ease-out"
                       style={{ width: `${progressPercentage}%` }}
                     ></div>
                     <div className="relative flex items-center justify-center h-full text-white font-semibold">
@@ -93,7 +93,7 @@ const EventsPage = () => {
                 {/* Event Status */}
                 <p className={`mt-4 font-bold text-lg ${
                   getEventStatus(event.date, event.disableRegistration) === "ONGOING" ? "text-green-500" :
-                  getEventStatus(event.date, event.disableRegistration) === "UPCOMING" ? "text-blue-500" : "text-gray-500"
+                  getEventStatus(event.date, event.disableRegistration) === "UPCOMING" ? "text-purple-500" : "text-gray-500"
                 }`}>
                   {getEventStatus(event.date, event.disableRegistration)}
                 </p>
@@ -101,7 +101,7 @@ const EventsPage = () => {
 
               {/* Register Button in Footer */}
               <Link href={`/register/${event.$id}/${event.slug}`}>
-                <div className="w-full py-4 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-b-xl flex items-center justify-between px-6">
+                <div className="w-full py-4 bg-gradient-to-r from-purple-500 to-indigo-500 rounded-b-xl flex items-center justify-between px-6">
                   <button className="text-white text-lg font-semibold cursor-pointer hover:underline">
                     Register for Event
                   </button>

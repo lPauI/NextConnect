@@ -33,7 +33,7 @@ export default function App({ Component, pageProps }) {
                 <div className="fixed bottom-4 left-4 z-50">
                     <div
                         onClick={() => setIsOpen(!isOpen)}
-                        className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full flex items-center justify-center cursor-pointer shadow-lg hover:bg-blue-700 transition duration-300"
+                        className="w-12 h-12 bg-gradient-to-r from-purple-500 to-purple-600 text-white rounded-full flex items-center justify-center cursor-pointer shadow-lg hover:bg-purple-700 transition duration-300"
                     >
                         <IoLanguage />
                     </div>

@@ -18,7 +18,7 @@ const EventTags = ({ eventId }) => {
             {tags.map((tag, index) => (
                 <span 
                 key={index} 
-                className="px-4 py-1 bg-blue-500 text-white rounded-full text-sm shadow-lg transform transition duration-300 ease-in-out hover:scale-105 hover:bg-blue-400"
+                className="px-4 py-1 bg-purple-500 text-white rounded-full text-sm shadow-lg transform transition duration-300 ease-in-out hover:scale-105 hover:bg-purple-400"
                 >
                     {tag}
                 </span>

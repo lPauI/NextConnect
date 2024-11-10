@@ -101,13 +101,13 @@ const Register = () => {
 						)}
 						<button
 							type="submit"
-							className="bg-blue-600 p-3 font-medium hover:bg-blue-700 text-white mb-3 rounded-md"
+							className="bg-purple-600 p-3 font-medium hover:bg-purple-700 text-white mb-3 rounded-md"
 						>
 							REGISTER
 						</button>
 						<p className="text-center">
 							Already have an account?{" "}
-							<Link href="/login" className="text-blue-600">
+							<Link href="/login" className="text-purple-600">
 								Sign in
 							</Link>
 						</p>

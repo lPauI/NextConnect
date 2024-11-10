@@ -19,10 +19,10 @@ export default function Home() {
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 				<link rel="icon" href="/images/favicon.ico" />
 			</Head>
-			<main className="home bg-gradient-to-br from-blue-50 via-white to-blue-100 min-h-screen">
+			<main className="home bg-gradient-to-br from-purple-50 via-white to-purple-100 min-h-screen">
 				<Nav />
 				{/* Hero Section */}
-				<section className="h-dvh flex flex-col justify-center items-center text-center bg-gradient-to-r from-blue-600 to-purple-700 text-white p-6 animated-gradient">
+				<section className="h-dvh flex flex-col justify-center items-center text-center bg-gradient-to-r from-purple-600 to-purple-700 text-white p-6 animated-gradient">
 					<h1 className="text-5xl md:text-6xl font-bold mb-4 animate-fade-in-up">Connect, Volunteer, Impact</h1>
 					<p className="text-xl md:text-2xl max-w-2xl mx-auto mb-8 animate-fade-in-up delay-100">
 						NextConnect brings passionate people together to make a lasting difference.
@@ -31,7 +31,7 @@ export default function Home() {
 					<div className="flex gap-6 mt-4">
 						<button
 							onClick={() => router.push("/dashboard")}
-							className="px-10 py-4 bg-white text-black font-semibold rounded-full shadow-lg hover:bg-blue-300 transition-all duration-300 animate-bounce delay-200"
+							className="px-10 py-4 bg-white text-black font-semibold rounded-full shadow-lg hover:bg-purple-300 transition-all duration-300 animate-bounce delay-200"
 						>
 							Create your event
 						</button>
@@ -47,7 +47,7 @@ export default function Home() {
 				{/* Why We’re Different */}
 				<section className="py-20 bg-white">
 					<div className="container mx-auto px-6 md:px-12 text-center">
-						<h2 className="text-3xl md:text-4xl font-extrabold text-blue-600 mb-6 animate-fade-in">
+						<h2 className="text-3xl md:text-4xl font-extrabold text-purple-600 mb-6 animate-fade-in">
 							What Makes Us Unique
 						</h2>
 						<p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto mb-12 animate-fade-in delay-100">
@@ -78,10 +78,10 @@ export default function Home() {
 							].map((item, index) => (
 								<div
 									key={index}
-									className="p-8 rounded-lg shadow-lg bg-blue-50 transition-all duration-300 hover:shadow-2xl animate-fade-in delay-200 flex flex-col items-center text-center"
+									className="p-8 rounded-lg shadow-lg bg-purple-50 transition-all duration-300 hover:shadow-2xl animate-fade-in delay-200 flex flex-col items-center text-center"
 								>
-									<div className="text-4xl text-blue-600 mb-4 animate-scale-up">{item.icon}</div>
-									<h3 className="text-2xl font-semibold text-blue-600 mb-4">{item.title}</h3>
+									<div className="text-4xl text-purple-600 mb-4 animate-scale-up">{item.icon}</div>
+									<h3 className="text-2xl font-semibold text-purple-600 mb-4">{item.title}</h3>
 									<p className="text-gray-600">{item.description}</p>
 								</div>
 							))}
@@ -90,15 +90,15 @@ export default function Home() {
 				</section>
 
 				{/* Areas of Focus */}
-				<section className="py-20 bg-blue-50">
+				<section className="py-20 bg-purple-50">
 					<div className="container mx-auto px-6 md:px-12">
-						<h2 className="text-3xl md:text-4xl font-extrabold text-blue-600 text-center mb-10 animate-fade-in">
+						<h2 className="text-3xl md:text-4xl font-extrabold text-purple-600 text-center mb-10 animate-fade-in">
 							Our Areas of Focus
 						</h2>
 						<div className='grid grid-cols-1 md:grid-cols-3 gap-12'>
 							<div className='p-8 rounded-lg shadow-lg bg-white hover:shadow-xl transition-all duration-300'>
-								<MdIncompleteCircle className='text-4xl text-blue-600 mb-4 mx-auto' />
-								<h3 className='text-2xl font-semibold text-blue-600 mb-4'>
+								<MdIncompleteCircle className='text-4xl text-purple-600 mb-4 mx-auto' />
+								<h3 className='text-2xl font-semibold text-purple-600 mb-4'>
 								Find Events
 								</h3>
 								<p className='text-gray-600'>
@@ -106,8 +106,8 @@ export default function Home() {
 								</p>
 							</div>
 							<div className='p-8 rounded-lg shadow-lg bg-white hover:shadow-xl transition-all duration-300'>
-								<FaLeaf className='text-4xl text-blue-600 mb-4 mx-auto' />
-								<h3 className='text-2xl font-semibold text-blue-600 mb-4'>
+								<FaLeaf className='text-4xl text-purple-600 mb-4 mx-auto' />
+								<h3 className='text-2xl font-semibold text-purple-600 mb-4'>
 								Join a Community
 								</h3>
 								<p className='text-gray-600'>
@@ -115,8 +115,8 @@ export default function Home() {
 								</p>
 							</div>
 							<div className='p-8 rounded-lg shadow-lg bg-white hover:shadow-xl transition-all duration-300'>
-								<FaChalkboardTeacher className='text-4xl text-blue-600 mb-4 mx-auto' />
-								<h3 className='text-2xl font-semibold text-blue-600 mb-4'>
+								<FaChalkboardTeacher className='text-4xl text-purple-600 mb-4 mx-auto' />
+								<h3 className='text-2xl font-semibold text-purple-600 mb-4'>
 								Host Your Event
 								</h3>
 								<p className='text-gray-600'>
@@ -128,7 +128,7 @@ export default function Home() {
 				</section>
 
 				{/* Impact Section */}
-				<section className='py-20 bg-gradient-to-r from-blue-500 to-purple-600 text-white'>
+				<section className='py-20 bg-gradient-to-r from-purple-500 to-purple-600 text-white'>
 					<div className='container mx-auto px-6 md:px-12 text-center'>
 						<h2 className='text-3xl md:text-4xl font-extrabold mb-4'>Our Impact</h2>
 						<p className='text-lg md:text-xl max-w-2xl mx-auto mb-10'>
@@ -143,7 +143,7 @@ export default function Home() {
 						</p>
 						<button
 							onClick={() => router.push("/about")}
-							className="px-10 py-4 bg-white text-black font-semibold rounded-full shadow-lg hover:bg-blue-700 transition-all duration-300 animate-bounce delay-200"
+							className="px-10 py-4 bg-white text-black font-semibold rounded-full shadow-lg hover:bg-purple-700 transition-all duration-300 animate-bounce delay-200"
 						>
 							Who we are
 						</button>

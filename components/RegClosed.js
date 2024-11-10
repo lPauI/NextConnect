@@ -14,10 +14,10 @@ const RegClosed = ({ event }) => {
 				<meta name='viewport' content='width=device-width, initial-scale=1' />
 				<link rel='icon' href='/images/favicon.ico' />
 			</Head>
-			<main className='w-full h-[100vh] flex flex-col items-center justify-center bg-blue-100'>
+			<main className='w-full h-[100vh] flex flex-col items-center justify-center bg-purple-100'>
 				<h2 className='text-2xl font-bold mb-6'>Registration closed! 😪</h2>
 				<p>
-					<Link href='/' className='text-blue-500'>
+					<Link href='/' className='text-purple-500'>
 						{event.title}
 					</Link>{" "}
 				</p>

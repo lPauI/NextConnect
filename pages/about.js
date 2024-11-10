@@ -5,10 +5,10 @@ import Footer from "../components/Footer";
 
 const About = () => {
   return (
-    <div className="home bg-gradient-to-br from-blue-50 via-white to-blue-100 min-h-screen">
+    <div className="home bg-gradient-to-br from-purple-50 via-white to-purple-100 min-h-screen">
       {/* Hero Section */}
       <Nav />
-      <section className="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white py-20 text-center px-6">
+      <section className="w-full bg-gradient-to-r from-purple-500 to-purple-600 text-white py-20 text-center px-6">
         <h1 className="text-5xl font-bold">About Us</h1>
         <p className="mt-4 text-xl">
         We believe in the power of connection. Nextconnect is here to create a world where everyone feels welcomed and valued, regardless of background or identity.
@@ -89,18 +89,18 @@ const About = () => {
         <div className="mt-8 space-y-8">
           <div className="bg-white rounded-lg shadow-md p-6">
             <p className="text-gray-700 italic">"A seamless experience from start to finish!"</p>
-            <p className="text-right mt-4 text-blue-700 font-semibold">– Alex Johnson</p>
+            <p className="text-right mt-4 text-purple-700 font-semibold">– Alex Johnson</p>
           </div>
           <div className="bg-white rounded-lg shadow-md p-6">
             <p className="text-gray-700 italic">"Changing the world has never been easier."</p>
-            <p className="text-right mt-4 text-blue-700 font-semibold">– Maria Gomez</p>
+            <p className="text-right mt-4 text-purple-700 font-semibold">– Maria Gomez</p>
           </div>
           {/* Add more testimonials */}
         </div>
       </section>
 
       {/* Technology Used Section */}
-      <section className="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white py-16 px-6">
+      <section className="w-full bg-gradient-to-r from-purple-500 to-purple-600 text-white py-16 px-6">
   <div className="max-w-6xl mx-auto text-center">
     <h2 className="text-3xl font-semibold">Technologies We Use</h2>
     <p className="mt-4 mb-8 max-w-2xl mx-auto">

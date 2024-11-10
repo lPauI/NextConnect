@@ -78,11 +78,11 @@ const CreateEventPage = () => {
                     {/* Back to Dashboard Button */}
                     <button
                         onClick={() => router.push("/dashboard")}
-                        className="flex items-center mb-4 text-blue-500 hover:text-blue-700 font-semibold absolute top-4 left-4"
+                        className="flex items-center mb-4 text-purple-500 hover:text-purple-700 font-semibold absolute top-4 left-4"
                     >
                         <FaArrowLeft className="mr-2" /> Back to Dashboard
                     </button>
-                    <h2 className="text-3xl font-bold text-center mb-6 text-blue-600 pt-5">🎉 Create a New Event</h2>
+                    <h2 className="text-3xl font-bold text-center mb-6 text-purple-600 pt-5">🎉 Create a New Event</h2>
                     <form className="flex flex-col" onSubmit={handleSubmit}>
                         {/* Title */}
                         <label htmlFor="title" className="font-semibold text-gray-700 mb-2">
@@ -91,7 +91,7 @@ const CreateEventPage = () => {
                         <input
                             name="title"
                             type="text"
-                            className="border py-2 px-4 rounded mb-4 focus:border-blue-500"
+                            className="border py-2 px-4 rounded mb-4 focus:border-purple-500"
                             value={title}
                             onChange={(e) => setTitle(e.target.value)}
                             required
@@ -104,7 +104,7 @@ const CreateEventPage = () => {
                         <input
                             name="venue"
                             type="text"
-                            className="border py-2 px-4 rounded mb-4 focus:border-blue-500"
+                            className="border py-2 px-4 rounded mb-4 focus:border-purple-500"
                             value={venue}
                             onChange={(e) => setVenue(e.target.value)}
                             placeholder="Enter location (e.g., Craft Timisoara)"
@@ -133,7 +133,7 @@ const CreateEventPage = () => {
                         <input
                             name="time"
                             type="time"
-                            className="border py-2 px-4 rounded mb-4 focus:border-blue-500"
+                            className="border py-2 px-4 rounded mb-4 focus:border-purple-500"
                             value={time}
                             onChange={(e) => setTime(e.target.value)}
                             required
@@ -146,7 +146,7 @@ const CreateEventPage = () => {
                         <DatePicker
                             selected={date}
                             onChange={(date) => setDate(date)}
-                            className="border py-2 px-4 rounded mb-4 focus:border-blue-500 w-full"
+                            className="border py-2 px-4 rounded mb-4 focus:border-purple-500 w-full"
                             minDate={new Date()}
                             required
                         />
@@ -158,7 +158,7 @@ const CreateEventPage = () => {
                         <textarea
                             name="description"
                             rows="4"
-                            className="border py-2 px-4 rounded mb-4 focus:border-blue-500"
+                            className="border py-2 px-4 rounded mb-4 focus:border-purple-500"
                             value={description}
                             onChange={(e) => setDescription(e.target.value)}
                             required
@@ -171,7 +171,7 @@ const CreateEventPage = () => {
                         <textarea
                             name="note"
                             rows="4"
-                            className="border py-2 px-4 rounded mb-4 focus:border-blue-500"
+                            className="border py-2 px-4 rounded mb-4 focus:border-purple-500"
                             value={note}
                             onChange={(e) => setNote(e.target.value)}
                             required
@@ -187,7 +187,7 @@ const CreateEventPage = () => {
                                     onClick={() => handleTagClick(tag)}
                                     className={`px-3 py-1 rounded-full border transition-all duration-300 ${
                                         selectedTags.includes(tag)
-                                            ? "bg-blue-600 text-white hover:bg-blue-500"
+                                            ? "bg-purple-600 text-white hover:bg-purple-500"
                                             : "bg-gray-200 hover:bg-gray-300"
                                     }`}
                                 >
@@ -204,7 +204,7 @@ const CreateEventPage = () => {
                             name="numParticipants"
                             type="number"
                             min="1"
-                            className="border py-2 px-4 rounded mb-4 focus:border-blue-500"
+                            className="border py-2 px-4 rounded mb-4 focus:border-purple-500"
                             value={numParticipants}
                             onChange={(e) => setNumParticipants(e.target.value)}
                             required
@@ -218,14 +218,14 @@ const CreateEventPage = () => {
                             type="file"
                             name="file"
                             onChange={(e) => setFlier(e.target.files[0])}
-                            className="border py-2 px-4 rounded mb-4 focus:border-blue-500"
+                            className="border py-2 px-4 rounded mb-4 focus:border-purple-500"
                             accept="image/png, image/jpeg"
                         />
 
                         {/* Submit */}
                         <button
                             type="submit"
-                            className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition-all duration-200 font-semibold"
+                            className="bg-purple-600 text-white py-2 px-4 rounded hover:bg-purple-700 transition-all duration-200 font-semibold"
                         >
                             Create Event 
                         </button>

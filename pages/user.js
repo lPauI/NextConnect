@@ -72,7 +72,7 @@ function UserDashboard() {
                             onClick={() => handleTagClick(tag)}
                             className={`px-4 py-2 rounded-md ${
                                 selectedTags.includes(tag)
-                                    ? "bg-blue-600 text-white"
+                                    ? "bg-purple-600 text-white"
                                     : "bg-gray-200 text-gray-700"
                             }`}
                         >

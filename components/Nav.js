@@ -46,7 +46,7 @@ const Nav = () => {
                 {/* Dashboard Button with Role Selection */}
                 <button
                     onClick={handleDashboardClick}
-                    className='px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition-all duration-300'
+                    className='px-4 py-2 bg-purple-600 text-white font-semibold rounded-lg shadow-md hover:bg-purple-700 transition-all duration-300'
                 >
                     Dashboard
                 </button>
@@ -61,14 +61,14 @@ const Nav = () => {
                 <nav className='fixed top-0 right-0 w-1/2 h-[100vh] p-6 bg-white z-50'>
                     <div className='w-full flex items-center justify-end mb-8'>
                         <MdCancel
-                            className='text-4xl text-blue-600 cursor-pointer hover:text-white'
+                            className='text-4xl text-purple-600 cursor-pointer hover:text-white'
                             onClick={() => setHamburger(false)}
                         />
                     </div>
                     <div className='flex w-full flex-col space-y-8'>
                         <button
                             onClick={handleDashboardClick}
-                            className='text-gray-700 hover:text-blue-600'
+                            className='text-gray-700 hover:text-purple-600'
                         >
                             Dashboard
                         </button>
@@ -83,7 +83,7 @@ const Nav = () => {
                         <div className='flex space-x-4'>
                             <button
                                 onClick={() => handleRoleSelection("organiser")}
-                                className='px-4 py-2 bg-blue-600 text-white rounded-md font-semibold hover:bg-blue-700 transition duration-200'
+                                className='px-4 py-2 bg-purple-600 text-white rounded-md font-semibold hover:bg-purple-700 transition duration-200'
                             >
                                 Event Organiser
                             </button>

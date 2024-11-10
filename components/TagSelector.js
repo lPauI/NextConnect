@@ -26,7 +26,7 @@ function TagSelector({ onSaveTags, existingTags = [] }) {
                             onClick={() => toggleTag(tag)}
                             className={`px-3 py-1 rounded-full border transition-all duration-200 ${
                                 selectedTags.includes(tag)
-                                    ? "bg-blue-500 text-white"
+                                    ? "bg-purple-500 text-white"
                                     : "bg-gray-200 text-gray-700"
                             }`}
                         >
@@ -36,7 +36,7 @@ function TagSelector({ onSaveTags, existingTags = [] }) {
                 </div>
                 <button
                     onClick={handleSave}
-                    className="w-full bg-blue-600 text-white py-2 rounded-md font-semibold hover:bg-blue-700 transition duration-200"
+                    className="w-full bg-purple-600 text-white py-2 rounded-md font-semibold hover:bg-purple-700 transition duration-200"
                 >
                     Save Interests
                 </button>
