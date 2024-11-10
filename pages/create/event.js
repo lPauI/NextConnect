@@ -76,6 +76,7 @@ const CreateEventPage = () => {
                 numParticipants,
                 router
             );
+            router.push('/dashboard');
         } catch (error) {
             console.error("Error creating event:", error);
         }
