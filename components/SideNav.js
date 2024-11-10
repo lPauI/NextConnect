@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { MdEvent } from "react-icons/md";
 import Link from "next/link";
 import { AiFillHome } from "react-icons/ai";
 import { BiMailSend } from "react-icons/bi";
@@ -18,6 +19,13 @@ const SideNav = () => {
 			>
 				<AiFillHome className='mr-2' size={22} />
 				Dashboard
+			</Link>
+			<Link
+				href='/events'
+				className='py-2 px-6 hover:bg-blue-600  hover:text-[#F1F6F9] w-full rounded mb-6 flex items-start'
+			>
+				<MdEvent className='mr-2' size={22} />
+				Events
 			</Link>
 			<Link
 				href='/create/event'
