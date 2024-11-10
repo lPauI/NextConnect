@@ -51,7 +51,7 @@ const Events = ({ events }) => {
 							<div className="flex items-center justify-center mb-6">
 								<div className="relative w-full h-8 bg-gray-200 rounded-full overflow-hidden shadow-inner">
 									<div 
-										className="absolute top-0 left-0 h-full bg-gradient-to-r from-blue-500 to-indigo-500 transition-all duration-500 ease-out"
+										className="absolute top-0 left-0 h-full bg-gradient-to-r from-purple-500 to-indigo-500 transition-all duration-500 ease-out"
 										style={{ width: `${progressPercentage}%` }}
 									></div>
 									<div className="relative flex items-center justify-center h-full text-white font-semibold">
@@ -74,7 +74,7 @@ const Events = ({ events }) => {
 									getEventStatus(event.date, event.disableRegistration) === "ONGOING"
 										? "text-green-500"
 										: getEventStatus(event.date, event.disableRegistration) === "UPCOMING"
-										? "text-blue-500"
+										? "text-purple-500"
 										: "text-gray-500"
 								}`}
 							>
@@ -82,7 +82,7 @@ const Events = ({ events }) => {
 							</p>
 						</div>
 
-						<div className="w-full py-4 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-b-xl flex items-center justify-between px-6">
+						<div className="w-full py-4 bg-gradient-to-r from-purple-500 to-indigo-500 rounded-b-xl flex items-center justify-between px-6">
 							<MdDelete
 								className="text-white text-2xl cursor-pointer hover:text-red-400 transition duration-300"
 								onClick={() => deleteTicket(event.$id)}

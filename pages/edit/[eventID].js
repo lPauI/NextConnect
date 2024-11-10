@@ -65,7 +65,7 @@ const EditEvent = () => {
         <div className="min-h-screen bg-gray-100 flex flex-col items-center py-10">
     
     <div className="bg-white p-8 rounded shadow-md w-full max-w-lg">
-        <h2 className="text-3xl font-bold text-center mb-6 text-blue-600">Edit Event</h2>
+        <h2 className="text-3xl font-bold text-center mb-6 text-purple-600">Edit Event</h2>
         <form className="flex flex-col" onSubmit={handleSubmit}>
             <label htmlFor="title" className="font-semibold text-gray-700 mb-2">Title</label>
             <input
@@ -73,7 +73,7 @@ const EditEvent = () => {
                 type="text"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                className="border py-2 px-4 rounded mb-4 focus:border-blue-500 focus:outline-none"
+                className="border py-2 px-4 rounded mb-4 focus:border-purple-500 focus:outline-none"
                 required
             />
             <label htmlFor="venue" className="font-semibold text-gray-700 mb-2">Venue</label>
@@ -82,7 +82,7 @@ const EditEvent = () => {
                 type="text"
                 value={venue}
                 onChange={(e) => setVenue(e.target.value)}
-                className="border py-2 px-4 rounded mb-4 focus:border-blue-500 focus:outline-none"
+                className="border py-2 px-4 rounded mb-4 focus:border-purple-500 focus:outline-none"
                 required
             />
             <label htmlFor="time" className="font-semibold text-gray-700 mb-2">Time</label>
@@ -91,14 +91,14 @@ const EditEvent = () => {
                 type="time"
                 value={time}
                 onChange={(e) => setTime(e.target.value)}
-                className="border py-2 px-4 rounded mb-4 focus:border-blue-500 focus:outline-none"
+                className="border py-2 px-4 rounded mb-4 focus:border-purple-500 focus:outline-none"
                 required
             />
             <label htmlFor="date" className="font-semibold text-gray-700 mb-2">Date</label>
             <DatePicker
                 selected={date}
                 onChange={(date) => setDate(date)}
-                className="border py-2 px-4 rounded mb-4 focus:border-blue-500 focus:outline-none w-full"
+                className="border py-2 px-4 rounded mb-4 focus:border-purple-500 focus:outline-none w-full"
             />
             <label htmlFor="description" className="font-semibold text-gray-700 mb-2">Event Description</label>
             <textarea
@@ -106,7 +106,7 @@ const EditEvent = () => {
                 rows="4"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-                className="border py-2 px-4 rounded mb-4 focus:border-blue-500 focus:outline-none"
+                className="border py-2 px-4 rounded mb-4 focus:border-purple-500 focus:outline-none"
             />
             <label htmlFor="note" className="font-semibold text-gray-700 mb-2">Note to Attendees</label>
             <textarea
@@ -114,11 +114,11 @@ const EditEvent = () => {
                 rows="4"
                 value={note}
                 onChange={(e) => setNote(e.target.value)}
-                className="border py-2 px-4 rounded mb-4 focus:border-blue-500 focus:outline-none"
+                className="border py-2 px-4 rounded mb-4 focus:border-purple-500 focus:outline-none"
             />
             <button
                 type="submit"
-                className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition-all duration-200 font-semibold"
+                className="bg-purple-600 text-white py-2 px-4 rounded hover:bg-purple-700 transition-all duration-200 font-semibold"
             >
                 Save Changes
             </button>

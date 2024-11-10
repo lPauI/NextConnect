@@ -82,7 +82,7 @@ const Attendees = ({
 				</h2>
 				{!click && (
 					<button
-						className={`p-2 ${click && "hidden"} text-white rounded-md bg-blue-600`}
+						className={`p-2 ${click && "hidden"} text-white rounded-md bg-purple-600`}
 						onClick={() => setDisableRegModal(true)}
 					>
 						End Event

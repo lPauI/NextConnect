@@ -133,7 +133,7 @@ const RegisterPage = ({ event }) => {
 
 						<button
 							type='submit'
-							className='bg-blue-600 p-3 font-medium hover:bg-blue-600 hover:text-[#FFF8DE] text-white mb-3 rounded-md'
+							className='bg-purple-600 p-3 font-medium hover:bg-purple-600 hover:text-[#FFF8DE] text-white mb-3 rounded-md'
 						>
 							GET TICKET
 						</button>
@@ -149,7 +149,7 @@ const RegisterPage = ({ event }) => {
 				</div>
 				{success && (
 					<div className='w-full h-[100vh] dim absolute top-0 flex items-center justify-center z-40'>
-						<div className='w-[400px] bg-white h-[300px] flex items-center justify-center flex-col rounded-md shadown-blue-100 shadow-md'>
+						<div className='w-[400px] bg-white h-[300px] flex items-center justify-center flex-col rounded-md shadown-purple-100 shadow-md'>
 							<h2 className='text-2xl font-extrabold mb-4 text-center'>
 								Registered Successfully! 🎉
 							</h2>
@@ -157,7 +157,7 @@ const RegisterPage = ({ event }) => {
 								Check your email for your ticket and event information.
 							</p>
 							<button
-								className='px-4 py-2 bg-blue-600 rounded-md text-white'
+								className='px-4 py-2 bg-purple-600 rounded-md text-white'
 								onClick={() => setSuccess(false)}
 							>
 								OK

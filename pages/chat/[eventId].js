@@ -60,13 +60,13 @@ const ChatPage = () => {
     };
     
     return (
-        <div className="min-h-screen bg-gradient-to-r from-blue-200 to-purple-300 flex flex-col">
+        <div className="min-h-screen bg-gradient-to-r from-purple-200 to-purple-300 flex flex-col">
             <div className="flex-grow max-w-10xl mx-auto bg-white rounded-lg shadow-lg p-6 flex flex-col">
                 <h1 className="text-3xl font-bold mb-4 text-center text-gray-800">Chat for Event {eventId}</h1>
                 <div className="messages mb-4 overflow-y-auto flex-grow h-96">
                     {messages.map((msg) => (
                         <div key={msg.$id} className="message p-4 mb-2 border rounded-lg shadow-sm bg-gray-100">
-                            <strong className="text-blue-600">User {msg.userId}:</strong> <span>{msg.message}</span>
+                            <strong className="text-purple-600">User {msg.userId}:</strong> <span>{msg.message}</span>
                         </div>
                     ))}
                 </div>
@@ -76,9 +76,9 @@ const ChatPage = () => {
                         value={newMessage}
                         onChange={(e) => setNewMessage(e.target.value)}
                         placeholder="Type a message..."
-                        className="flex-grow p-2 border rounded-l-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                        className="flex-grow p-2 border rounded-l-lg focus:outline-none focus:ring-2 focus:ring-purple-400"
                     />
-                    <button type="submit" className="bg-blue-600 text-white p-2 rounded-r-lg hover:bg-blue-700 transition duration-200">
+                    <button type="submit" className="bg-purple-600 text-white p-2 rounded-r-lg hover:bg-purple-700 transition duration-200">
                         Send
                     </button>
                 </form>

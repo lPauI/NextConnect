@@ -1,4 +1,4 @@
-# Volunteering application with Next.js and Appwrite Cloud
+# Safe Spaces application with Next.js and Appwrite Cloud
 ### Features: 
 - authenticates users via Email and Password with Appwrite,
 - allows users to create events and generate a registration link to share with friends or the public.

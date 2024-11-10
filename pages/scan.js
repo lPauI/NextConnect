@@ -106,12 +106,12 @@ class QRScan extends React.Component {
 
   render() {
     return (
-      <div className='home bg-gradient-to-br from-blue-50 via-white to-blue-100 min-h-screen'>
+      <div className='home bg-gradient-to-br from-purple-50 via-white to-purple-100 min-h-screen'>
         <Nav />
-        <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-blue-50 to-teal-50 p-4">
-          <h1 className="text-3xl font-semibold text-blue-600 mb-6">Scan QR Code</h1>
+        <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-purple-50 to-teal-50 p-4">
+          <h1 className="text-3xl font-semibold text-purple-600 mb-6">Scan QR Code</h1>
 
-          <div className="bg-white shadow-md rounded-lg overflow-hidden border border-blue-300 mb-4 p-4">
+          <div className="bg-white shadow-md rounded-lg overflow-hidden border border-purple-300 mb-4 p-4">
             <QrReader
               delay={this.state.delay}
               onError={this.handleError}
@@ -120,7 +120,7 @@ class QRScan extends React.Component {
             />
           </div>
 
-          <div className="w-full max-w-md text-center bg-white border border-blue-200 shadow-md rounded-lg p-6 space-y-4">
+          <div className="w-full max-w-md text-center bg-white border border-purple-200 shadow-md rounded-lg p-6 space-y-4">
             <div>
               <p className="text-sm font-medium text-gray-500 uppercase">Scanned Result</p>
               <p className="text-lg font-semibold text-gray-700">{this.state.result}</p>

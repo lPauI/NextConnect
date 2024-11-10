@@ -5,13 +5,13 @@ import Footer from "../components/Footer";
 
 const About = () => {
   return (
-    <div className="home bg-gradient-to-br from-blue-50 via-white to-blue-100 min-h-screen">
+    <div className="home bg-gradient-to-br from-purple-50 via-white to-purple-100 min-h-screen">
       {/* Hero Section */}
       <Nav />
-      <section className="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white py-20 text-center px-6">
+      <section className="w-full bg-gradient-to-r from-purple-500 to-purple-600 text-white py-20 text-center px-6">
         <h1 className="text-5xl font-bold">About Us</h1>
         <p className="mt-4 text-xl">
-          Empowering volunteers to easily manage their events for unforgettable experiences.
+        We believe in the power of connection. Nextconnect is here to create a world where everyone feels welcomed and valued, regardless of background or identity.
         </p>
       </section>
 
@@ -20,21 +20,21 @@ const About = () => {
         <h2 className="text-3xl font-semibold text-center lg:col-span-3">Our Core Values</h2>
         <div className="flex flex-col items-center p-6 bg-white rounded-lg shadow-lg">
           <img src="/images/icon-quality.svg" alt="Quality" className="h-16 mb-4" />
-          <h3 className="text-xl font-bold mb-2 ">Quality Experience</h3>
+          <h3 className="text-xl font-bold mb-2 ">Inclusion</h3>
           <p className="text-gray-600 text-center">
-            We provide a seamless experience for our customers with a focus on reliability and convenience.
+          Making space for everyone, no matter who they are or where they come from.
           </p>
         </div>
         <div className="flex flex-col items-center p-6 bg-white rounded-lg shadow-lg">
           <img src="/images/icon-innovation.svg" alt="Innovation" className="h-16 mb-4" />
-          <h3 className="text-xl font-bold mb-2">Innovation</h3>
+          <h3 className="text-xl font-bold mb-2">Community Support</h3>
           <p className="text-gray-600 text-center">
-            Our platform is built with cutting-edge technologies for a smooth booking experience.
+          Building a network of support, so no one feels alone.
           </p>
         </div>
         <div className="flex flex-col items-center p-6 bg-white rounded-lg shadow-lg">
           <img src="/images/icon-support.svg" alt="Support" className="h-16 mb-4" />
-          <h3 className="text-xl font-bold mb-2">Dedicated Support</h3>
+          <h3 className="text-xl font-bold mb-2">Unity in Diversity</h3>
           <p className="text-gray-600 text-center">
             Our team is here to assist you at every step, ensuring a hassle-free experience.
           </p>
@@ -52,31 +52,31 @@ const About = () => {
       <div className="bg-white rounded-lg shadow-lg p-6">
         <img src="/images/team-member-1.png" alt="Cimbru Darius" className="h-32 w-32 rounded-full mx-auto object-cover" />
         <h3 className="text-xl font-bold mt-4">Cimbru Darius</h3>
-        <p className="text-gray-600">Head Developer</p>
+        <p className="text-gray-600">Lead Developer</p>
       </div>
       
       <div className="bg-white rounded-lg shadow-lg p-6">
         <img src="/images/team-member-2.png" alt="Lascu Paul" className="h-32 w-32 rounded-full mx-auto object-cover" />
         <h3 className="text-xl font-bold mt-4">Lascu Paul</h3>
-        <p className="text-gray-600">Software Engineer</p>
+        <p className="text-gray-600">Developer</p>
       </div>
       
       <div className="bg-white rounded-lg shadow-lg p-6">
         <img src="/images/team-member-3.png" alt="Barbu Razvan" className="h-32 w-32 rounded-full mx-auto object-cover" />
         <h3 className="text-xl font-bold mt-4">Barbu Razvan</h3>
-        <p className="text-gray-600">AI Developer</p>
+        <p className="text-gray-600">Diversity & Inclusion Specialist</p>
       </div>
 
       <div className="bg-white rounded-lg shadow-lg p-6">
         <img src="/images/team-member-4.jpg" alt="Alex Cortojan" className="h-32 w-32 rounded-full mx-auto object-cover" />
         <h3 className="text-xl font-bold mt-4">Alex Cortojan</h3>
-        <p className="text-gray-600">Developer</p>
+        <p className="text-gray-600">UX/UI Designer</p>
       </div>
       
       <div className="bg-white rounded-lg shadow-lg p-6">
         <img src="/images/team-member-5.png" alt="Erol Ciucur" className="h-32 w-32 rounded-full mx-auto object-cover" />
         <h3 className="text-xl font-bold mt-4">Erol Ciucur</h3>
-        <p className="text-gray-600">Developer</p>
+        <p className="text-gray-600">Event Coordinator</p>
       </div>
     </div>
   </div>
@@ -88,19 +88,19 @@ const About = () => {
         <h2 className="text-3xl font-semibold text-center">What Our Users Say</h2>
         <div className="mt-8 space-y-8">
           <div className="bg-white rounded-lg shadow-md p-6">
-            <p className="text-gray-700 italic">"A seamless experience from start to finish!"</p>
-            <p className="text-right mt-4 text-blue-700 font-semibold">– Alex Johnson</p>
+            <p className="text-gray-700 italic">"Nextconnect gave me a space where I can be myself and connect with others who understand my journey. It’s been life-changing"</p>
+            <p className="text-right mt-4 text-purple-700 font-semibold">– Alex Johnson</p>
           </div>
           <div className="bg-white rounded-lg shadow-md p-6">
-            <p className="text-gray-700 italic">"Changing the world has never been easier."</p>
-            <p className="text-right mt-4 text-blue-700 font-semibold">– Maria Gomez</p>
+            <p className="text-gray-700 italic">"Finding a community that celebrates diversity has never been this easy. I feel seen and valued here."</p>
+            <p className="text-right mt-4 text-purple-700 font-semibold">– Maria Gomez</p>
           </div>
           {/* Add more testimonials */}
         </div>
       </section>
 
       {/* Technology Used Section */}
-      <section className="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white py-16 px-6">
+      <section className="w-full bg-gradient-to-r from-purple-500 to-purple-600 text-white py-16 px-6">
   <div className="max-w-6xl mx-auto text-center">
     <h2 className="text-3xl font-semibold">Technologies We Use</h2>
     <p className="mt-4 mb-8 max-w-2xl mx-auto">

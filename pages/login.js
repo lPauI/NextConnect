@@ -63,21 +63,21 @@ const Login = () => {
 
 						<button
 							type="submit"
-							className="bg-blue-600 p-3 font-medium hover:bg-blue-700 mb-3 rounded-md text-white"
+							className="bg-purple-600 p-3 font-medium hover:bg-purple-700 mb-3 rounded-md text-white"
 						>
 							SIGN IN
 						</button>
 
 						{/* Forgot Password Link */}
 						<p className="text-center mb-3">
-							<Link href="/forgot-password" className="text-blue-600">
+							<Link href="/forgot-password" className="text-purple-600">
 								Forgot Password?
 							</Link>
 						</p>
 
 						<p className="text-center">
 							Don't have an account?{" "}
-							<Link href="/register" className="text-blue-600">
+							<Link href="/register" className="text-purple-600">
 								Register
 							</Link>
 						</p>
