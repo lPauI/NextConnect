@@ -350,6 +350,7 @@ export const createEvent = async (
             await setVenueCoordinates(response.$id, venue);
 
             successMessage("Event created successfully 🎉");
+            router.push("/dashboard");
             return response.$id;
         } catch (error) {
             errorMessage("Error creating event ❌");
